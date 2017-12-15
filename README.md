@@ -7,6 +7,9 @@ App which attempts to use the latest cutting edge libraries and tools. As a summ
  * Entirely written in [Kotlin](https://kotlinlang.org/)
  * Uses [RxJava](https://github.com/ReactiveX/RxJava) 2
  * Uses [dagger-android](https://google.github.io/dagger/android.html) for dependency injection
+ * Uses [Conductor](https://github.com/bluelinelabs/Conductor) for simple View-based framework without Fragments
+ * Uses [Glide](https://github.com/bumptech/glide) for image loading
+ * Uses [Groupie](https://github.com/lisawray/groupie) for RecyclerView layouts with Kotlin support
 
 ## Development setup
 
