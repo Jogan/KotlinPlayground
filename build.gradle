@@ -1,18 +1,39 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.kotlin_version = '1.2.0'
+    ext.versions = [
+            'support_library'  : '27.0.2',
+            'constraint_layout': '1.1.0-beta3',
+            'kotlin'           : '1.2.0',
+            'espresso'         : '3.0.1',
+            'dagger'           : '2.13',
+            'ktlint'           : '0.14.0',
+            'leakcanary'       : '1.5.4',
+            'rx'               : '2.1.7',
+            'rxandroid'        : '2.0.1',
+            'rxlint'           : '1.6'
+    ]
+
     repositories {
         google()
         jcenter()
     }
+
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.1'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}"
+        classpath "org.jetbrains.kotlin:kotlin-android-extensions:${versions.kotlin}"
+
+        classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.8.1'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
+}
+
+plugins {
+    id "com.diffplug.gradle.spotless" version "3.7.0"
+    id 'com.github.ben-manes.versions' version "0.17.0"
 }
 
 allprojects {
@@ -20,8 +41,26 @@ allprojects {
         google()
         jcenter()
     }
+
+    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+        kotlinOptions {
+            jvmTarget = "1.8"
+        }
+    }
 }
 
-task clean(type: Delete) {
-    delete rootProject.buildDir
+subprojects {
+    apply plugin: 'com.diffplug.gradle.spotless'
+    spotless {
+        kotlin {
+            target "**/*.kt"
+            ktlint(versions.ktlint)
+            licenseHeaderFile project.rootProject.file('spotless/copyright.kt')
+        }
+    }
+}
+
+String propOrDef(String propertyName, String defaultValue) {
+    def propertyValue = project.properties[propertyName]
+    return propertyValue != null ? propertyValue : defaultValue
 }

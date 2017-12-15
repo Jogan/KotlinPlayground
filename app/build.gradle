@@ -1,19 +1,48 @@
+ext {
+    ci = System.getenv("CI") == "true"
+}
+
 apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
-
+apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
+androidExtensions {
+    experimental = true
+}
+
+apply plugin: 'com.getkeepsafe.dexcount'
+dexcount {
+    // Only run the method counter on CI
+    runOnEachPackage = ci
+}
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 27
     defaultConfig {
         applicationId "com.jogan.kotlinplayground"
         minSdkVersion 21
-        targetSdkVersion 26
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    dexOptions {
+        // Don't pre-dex on CI
+        preDexLibraries !ci
+    }
+
+    lintOptions {
+        // Disable lintVital. Not needed since lint is run on CI
+        checkReleaseBuilds false
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -23,10 +52,38 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation "com.android.support:appcompat-v7:${versions.support_library}"
+    implementation "com.android.support:design:${versions.support_library}"
+    implementation "com.android.support:customtabs:${versions.support_library}"
+    implementation "com.android.support:palette-v7:${versions.support_library}"
+    implementation "com.android.support.constraint:constraint-layout:${versions.constraint_layout}"
+
+    implementation "com.google.dagger:dagger-android:${versions.dagger}"
+    implementation "com.google.dagger:dagger-android-support:${versions.dagger}"
+    kapt "com.google.dagger:dagger-compiler:${versions.dagger}"
+    kapt "com.google.dagger:dagger-android-processor:${versions.dagger}"
+
+    implementation "com.github.bumptech.glide:glide:4.4.0"
+
+    implementation 'com.xwray:groupie:2.0.0-beta1'
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    androidTestImplementation("com.android.support.test.espresso:espresso-core:${versions.espresso}", {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
+    debugImplementation "nl.littlerobots.rxlint:rxlint:${versions.rxlint}"
+
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:${versions.leakcanary}"
+    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:${versions.leakcanary}"
+}
+
+def getGitHash() {
+    def stdout = new ByteArrayOutputStream()
+    exec {
+        commandLine 'git', 'rev-parse', '--short', 'HEAD'
+        standardOutput = stdout
+    }
+    return stdout.toString().trim()
 }
