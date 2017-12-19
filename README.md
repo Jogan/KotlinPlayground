@@ -9,7 +9,7 @@ App which attempts to use the latest cutting edge libraries and tools. As a summ
  * Uses [dagger-android](https://google.github.io/dagger/android.html) for dependency injection
  * Uses [Conductor](https://github.com/bluelinelabs/Conductor) for simple View-based framework without Fragments
  * Uses [Glide](https://github.com/bumptech/glide) for image loading
- * Uses [Groupie](https://github.com/lisawray/groupie) for RecyclerView layouts with Kotlin support
+ * Uses [Epoxy](https://github.com/airbnb/epoxy) for RecyclerView layouts with Kotlin support
 
 ## Development setup
 

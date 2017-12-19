@@ -6,6 +6,9 @@ apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+kapt {
+    correctErrorTypes = true
+}
 apply plugin: 'kotlin-android-extensions'
 androidExtensions {
     experimental = true
@@ -62,7 +65,6 @@ dependencies {
 
     implementation "com.google.dagger:dagger-android:${versions.dagger}"
     implementation "com.google.dagger:dagger-android-support:${versions.dagger}"
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     kapt "com.google.dagger:dagger-compiler:${versions.dagger}"
     kapt "com.google.dagger:dagger-android-processor:${versions.dagger}"
 
@@ -72,7 +74,9 @@ dependencies {
 
     implementation "com.github.bumptech.glide:glide:4.4.0"
 
-    implementation 'com.xwray:groupie:2.0.0-beta1'
+    implementation "com.airbnb.android:epoxy:${versions.epoxy}"
+    implementation "com.airbnb.android:epoxy-paging:${versions.epoxy}"
+    kapt "com.airbnb.android:epoxy-processor:${versions.epoxy}"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
