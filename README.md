@@ -5,9 +5,11 @@
 App which attempts to use the latest cutting edge libraries and tools. As a summary:
 
  * Entirely written in [Kotlin](https://kotlinlang.org/)
+ * Unidirectional data flow (fully reactive architecture)
  * Uses [RxJava](https://github.com/ReactiveX/RxJava) 2
+ * Uses [RxAndroid](https://github.com/ReactiveX/RxAndroid) and [RxKotlin](https://github.com/ReactiveX/RxKotlin) Extensions 
+ * Uses all of the [Architecture Components](https://developer.android.com/topic/libraries/architecture/): Room, LiveData and Lifecycle-components
  * Uses [dagger-android](https://google.github.io/dagger/android.html) for dependency injection
- * Uses [Conductor](https://github.com/bluelinelabs/Conductor) for simple View-based framework without Fragments
  * Uses [Glide](https://github.com/bumptech/glide) for image loading
  * Uses [Epoxy](https://github.com/airbnb/epoxy) for RecyclerView layouts with Kotlin support
 

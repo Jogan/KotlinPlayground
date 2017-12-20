@@ -1,20 +1,20 @@
 package com.jogan.kotlinplayground
 
-import android.app.Application
-import com.squareup.leakcanary.LeakCanary
-import com.squareup.leakcanary.RefWatcher
+import dagger.android.AndroidInjector
+import dagger.android.DaggerApplication
+import javax.inject.Inject
 
 
-class PlaygroundApplication : Application() {
+class PlaygroundApplication : DaggerApplication() {
 
-    private lateinit var refWatcher: RefWatcher
+    @Inject lateinit var managers: AppManagers
 
     override fun onCreate() {
         super.onCreate()
-        if (LeakCanary.isInAnalyzerProcess(this)) {
-            // This process is dedicated to LeakCanary for heap analysis.
-            return
-        }
-        refWatcher = LeakCanary.install(this)
+        managers.init(this)
+    }
+
+    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
+        return DaggerAppComponent.builder().create(this)
     }
 }
