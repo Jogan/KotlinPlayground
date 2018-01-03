@@ -1,10 +1,10 @@
 package com.jogan.kotlinplayground.injection
 
 import android.content.Context
-import com.jogan.kotlinplayground.AppManagers
-import com.jogan.kotlinplayground.LeakCanaryManager
+import com.jogan.kotlinplayground.AppInitializers
+import com.jogan.kotlinplayground.LeakCanaryInitializer
 import com.jogan.kotlinplayground.PlaygroundApplication
-import com.jogan.kotlinplayground.TimberManager
+import com.jogan.kotlinplayground.TimberInitializer
 import dagger.Module
 import dagger.Provides
 
@@ -16,8 +16,8 @@ class AppModule {
     }
 
     @Provides
-    fun provideAppManagers(leakCanaryManager: LeakCanaryManager, timberManager: TimberManager): AppManagers {
-        return AppManagers(leakCanaryManager, timberManager)
+    fun provideAppInitializers(leakCanaryInitializer: LeakCanaryInitializer, timberInitializer: TimberInitializer): AppInitializers {
+        return AppInitializers(leakCanaryInitializer, timberInitializer)
     }
 }
 

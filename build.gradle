@@ -17,8 +17,7 @@ buildscript {
             'rx'               : '2.1.7',
             'rxandroid'        : '2.0.1',
             'rxkotlin'         : '2.2.0',
-            'rxlint'           : '1.6',
-            'epoxy'            : '2.7.3'
+            'rxlint'           : '1.6'
     ]
 
     repositories {

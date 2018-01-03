@@ -7,11 +7,11 @@ import javax.inject.Inject
 
 class PlaygroundApplication : DaggerApplication() {
 
-    @Inject lateinit var managers: AppManagers
+    @Inject lateinit var initializers: AppInitializers
 
     override fun onCreate() {
         super.onCreate()
-        managers.init(this)
+        initializers.init(this)
     }
 
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> {

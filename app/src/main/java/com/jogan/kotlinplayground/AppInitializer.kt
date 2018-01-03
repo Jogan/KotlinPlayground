@@ -2,6 +2,6 @@ package com.jogan.kotlinplayground
 
 import android.app.Application
 
-interface AppManager {
+interface AppInitializer {
     fun init(application: Application)
 }
