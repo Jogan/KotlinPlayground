@@ -1,25 +1,6 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-
 buildscript {
-    ext.versions = [
-            'support_library'  : '27.0.2',
-            'room'             : '1.0.0',
-            'arch_comp'        : '1.0.0',
-            'arch_comp_paging' : '1.0.0-alpha4-1',
-            'constraint_layout': '1.1.0-beta4',
-            'kotlin'           : '1.2.10',
-            'espresso'         : '3.0.1',
-            'dagger'           : '2.14.1',
-            'retrofit'         : '2.3.0',
-            'okhttp'           : '3.9.1',
-            'ktlint'           : '0.14.0',
-            'leakcanary'       : '1.5.4',
-            'rx'               : '2.1.7',
-            'rxandroid'        : '2.0.1',
-            'rxkotlin'         : '2.2.0',
-            'rxlint'           : '1.6'
-    ]
-
+    ext.kotlinVersion = '1.2.10'
     repositories {
         google()
         jcenter()
@@ -27,8 +8,8 @@ buildscript {
 
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.1'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}"
-        classpath "org.jetbrains.kotlin:kotlin-android-extensions:${versions.kotlin}"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+        classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlinVersion"
 
         classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.8.2'
 
@@ -41,6 +22,8 @@ plugins {
     id "com.diffplug.gradle.spotless" version "3.7.0"
     id 'com.github.ben-manes.versions' version "0.17.0"
 }
+
+apply from: 'dependencies.gradle'
 
 allprojects {
     repositories {
@@ -60,7 +43,7 @@ subprojects {
     spotless {
         kotlin {
             target "**/*.kt"
-            ktlint(versions.ktlint)
+            ktlint(ktLintVersion)
             licenseHeaderFile project.rootProject.file('spotless/copyright.kt')
         }
     }
