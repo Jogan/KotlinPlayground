@@ -7,7 +7,7 @@ dependencies {
     def dataDependencies = rootProject.ext.dataDependencies
     def dataTestDependencies = rootProject.ext.dataTestDependencies
 
-    // TODO compile project(':domain')
+    compile project(':domain')
 
     compile dataDependencies.javaxAnnotation
 
