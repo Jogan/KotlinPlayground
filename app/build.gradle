@@ -76,6 +76,7 @@ dependencies {
     def mobileUiDependencies = rootProject.ext.mobileUiDependencies
     def mobileUiTestDependencies = rootProject.ext.mobileUiTestDependencies
 
+    // TODO
 //    implementation project(':presentation')
 //    implementation project(':data')
 //    implementation project(':cache')
@@ -121,16 +122,16 @@ dependencies {
     androidTestImplementation mobileUiTestDependencies.junit
     androidTestImplementation mobileUiTestDependencies.mockito
     androidTestImplementation mobileUiTestDependencies.mockitoAndroid
-    androidTestImplementation (mobileUiTestDependencies.espressoCore) {
+    androidTestImplementation(mobileUiTestDependencies.espressoCore) {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
-    androidTestImplementation (mobileUiTestDependencies.androidRunner) {
+    androidTestImplementation(mobileUiTestDependencies.androidRunner) {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
-    androidTestImplementation (mobileUiTestDependencies.androidRules) {
+    androidTestImplementation(mobileUiTestDependencies.androidRules) {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
-    androidTestImplementation (mobileUiTestDependencies.espressoIntents) {
+    androidTestImplementation(mobileUiTestDependencies.espressoIntents) {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
     androidTestImplementation(mobileUiTestDependencies.espressoContrib) {
