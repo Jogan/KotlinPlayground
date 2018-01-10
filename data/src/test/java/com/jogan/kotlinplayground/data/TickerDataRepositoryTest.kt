@@ -13,12 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.jogan.kotlinplayground.domain.executor
+package com.jogan.kotlinplayground.data
 
-import java.util.concurrent.Executor
-
-/**
- * Executor implementation can be based on different frameworks or techniques of asynchronous
- * execution, but every implementation will execute
- */
-interface ThreadExecutor : Executor
+// TODO tests for TickerDataRepository
+class TickerDataRepositoryTest
