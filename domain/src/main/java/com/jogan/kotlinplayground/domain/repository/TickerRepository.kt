@@ -12,7 +12,7 @@ import io.reactivex.Flowable
 interface TickerRepository {
     fun clearTickers(): Completable
 
-    fun saveTickers(tickers: List<Ticker>): Completable
+    fun saveTickerForCurrency(id: String, tickers: List<Ticker>): Completable
 
     fun getTickerForCurrency(id: String?): Flowable<List<Ticker>>
 }
