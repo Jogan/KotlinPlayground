@@ -7,7 +7,7 @@ allprojects {
 
 ext {
     //Android
-    androidBuildToolsVersion = "27.0.2"
+    androidBuildToolsVersion = "27.0.3"
     androidMinSdkVersion = 21
     androidTargetSdkVersion = 27
     androidCompileSdkVersion = 27
@@ -25,7 +25,6 @@ ext {
     moshiVersion = '1.5.0'
     okHttpVersion = '3.9.1'
     retrofitVersion = '2.3.0'
-    roomVersion = '1.0.0'
     archComponentsVersion = '1.0.0'
     archComponentsPagingVersion = '1.0.0-alpha4-1'
     constraintLayoutVersion = '1.1.0-beta4'
@@ -80,9 +79,9 @@ ext {
             retrofit          : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
             retrofitConverter : "com.squareup.retrofit2:converter-moshi:${retrofitVersion}",
             retrofitAdapter   : "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
-            archRuntime       : "android.arch.lifecycle:runtime:${roomVersion}",
-            archExtensions    : "android.arch.lifecycle:extensions:${roomVersion}",
-            archCompiler      : "android.arch.lifecycle:compiler:${roomVersion}",
+            archRuntime       : "android.arch.lifecycle:runtime:${archComponentsVersion}",
+            archExtensions    : "android.arch.lifecycle:extensions:${archComponentsVersion}",
+            archCompiler      : "android.arch.lifecycle:compiler:${archComponentsVersion}",
     ]
 
     presentationTestDependencies = [
@@ -127,9 +126,9 @@ ext {
             javaxAnnotation   : "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
             javaxInject       : "javax.inject:javax.inject:${javaxInjectVersion}",
             androidAnnotations: "com.android.support:support-annotations:${supportLibraryVersion}",
-            roomRuntime       : "android.arch.persistence.room:runtime:${roomVersion}",
-            roomCompiler      : "android.arch.persistence.room:compiler:${roomVersion}",
-            roomRxJava        : "android.arch.persistence.room:rxjava2:${roomVersion}"
+            roomRuntime       : "android.arch.persistence.room:runtime:${archComponentsVersion}",
+            roomCompiler      : "android.arch.persistence.room:compiler:${archComponentsVersion}",
+            roomRxJava        : "android.arch.persistence.room:rxjava2:${archComponentsVersion}"
     ]
 
     cacheTestDependencies = [
@@ -138,8 +137,8 @@ ext {
             assertj      : "org.assertj:assertj-core:${assertJVersion}",
             mockito      : "com.nhaarman:mockito-kotlin:${mockitoKotlinVersion}",
             robolectric  : "org.robolectric:robolectric:${robolectricVersion}",
-            roomTesting  : "android.arch.persistence.room:testing:${roomVersion}",
-            archTesting  : "android.arch.core:core-testing:${roomVersion}",
+            roomTesting  : "android.arch.persistence.room:testing:${archComponentsVersion}",
+            archTesting  : "android.arch.core:core-testing:${archComponentsVersion}",
             supportRunner: "com.android.support.test:runner:${androidSupportRunnerVersion}",
             supportRules : "com.android.support.test:rules:${androidSupportRulesVersion}"
     ]
@@ -188,9 +187,9 @@ ext {
             groupie            : "com.xwray:groupie:${groupieVersion}",
             timber             : "com.jakewharton.timber:timber:${timberVersion}",
             glassfishAnnotation: "org.glassfish:javax.annotation:${glassfishAnnotationVersion}",
-            roomRuntime        : "android.arch.persistence.room:runtime:${roomVersion}",
-            roomCompiler       : "android.arch.persistence.room:compiler:${roomVersion}",
-            roomRxJava         : "android.arch.persistence.room:rxjava2:${roomVersion}",
+            roomRuntime        : "android.arch.persistence.room:runtime:${archComponentsVersion}",
+            roomCompiler       : "android.arch.persistence.room:compiler:${archComponentsVersion}",
+            roomRxJava         : "android.arch.persistence.room:rxjava2:${archComponentsVersion}",
             archExtensions     : "android.arch.lifecycle:extensions:${archComponentsVersion}",
             archRxExtensions   : "android.arch.lifecycle:reactivestreams:${archComponentsVersion}",
             archCompiler       : "android.arch.lifecycle:compiler:${archComponentsVersion}",
