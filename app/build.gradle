@@ -73,68 +73,77 @@ configurations.all {
 }
 
 dependencies {
-    def mobileUiDependencies = rootProject.ext.mobileUiDependencies
-    def mobileUiTestDependencies = rootProject.ext.mobileUiTestDependencies
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre8:${rootProject.kotlinVersion}"
 
-    // TODO
-//    implementation project(':presentation')
-//    implementation project(':data')
-//    implementation project(':cache')
-//    implementation project(':remote')
+    implementation "com.android.support:support-annotations:${rootProject.supportLibraryVersion}"
+    implementation "com.android.support:appcompat-v7:${rootProject.supportLibraryVersion}"
+    implementation "com.android.support:design:${rootProject.supportLibraryVersion}"
+    implementation "com.android.support:recyclerview-v7:${rootProject.supportLibraryVersion}"
+    implementation "com.android.support.constraint:constraint-layout:${rootProject.constraintLayoutVersion}"
 
-    implementation mobileUiDependencies.kotlin
+    implementation "android.arch.lifecycle:runtime:${rootProject.archComponentsVersion}"
+    implementation "android.arch.lifecycle:extensions:${rootProject.archComponentsVersion}"
+    implementation "android.arch.lifecycle:reactivestreams:${rootProject.archComponentsVersion}"
+    implementation "android.arch.paging:runtime:${rootProject.archComponentsPagingVersion}"
+    kapt "android.arch.lifecycle:compiler:${rootProject.archComponentsVersion}"
+    implementation "android.arch.persistence.room:runtime:${rootProject.archComponentsVersion}"
+    implementation "android.arch.persistence.room:rxjava2:${rootProject.archComponentsVersion}"
+    kapt "android.arch.persistence.room:compiler:${rootProject.archComponentsVersion}"
 
-    implementation mobileUiDependencies.archExtensions
-    implementation mobileUiDependencies.archRxExtensions
-    kapt mobileUiDependencies.archCompiler
+    implementation "com.google.dagger:dagger-android:${rootProject.daggerVersion}"
+    implementation "com.google.dagger:dagger-android-support:${rootProject.daggerVersion}"
+    kapt "com.google.dagger:dagger-compiler:${rootProject.daggerVersion}"
+    kapt "com.google.dagger:dagger-android-processor:${rootProject.daggerVersion}"
 
-    implementation mobileUiDependencies.archPaging
+    implementation "io.reactivex.rxjava2:rxkotlin:${rootProject.rxKotlinVersion}"
+    implementation "io.reactivex.rxjava2:rxandroid:${rootProject.rxAndroidVersion}"
 
-    implementation mobileUiDependencies.roomRuntime
-    implementation mobileUiDependencies.roomRxJava
-    kapt mobileUiDependencies.roomCompiler
+    //implementation domainDependencies.javaxAnnotation
+    implementation "javax.inject:javax.inject:${rootProject.javaxInjectVersion}"
 
-    implementation mobileUiDependencies.supportAnnotations
-    implementation mobileUiDependencies.supportAppCompatV7
-    implementation mobileUiDependencies.supportDesign
-    implementation mobileUiDependencies.supportConstraint
+    implementation "com.squareup.moshi:moshi:${rootProject.moshiVersion}"
+    implementation "com.squareup.okhttp3:okhttp:${rootProject.okHttpVersion}"
+    implementation "com.squareup.okhttp3:logging-interceptor:${rootProject.okHttpVersion}"
+    implementation "com.squareup.retrofit2:retrofit:${rootProject.retrofitVersion}"
+    implementation "com.squareup.retrofit2:converter-moshi:${rootProject.retrofitVersion}"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:${rootProject.retrofitVersion}"
 
-    implementation mobileUiDependencies.daggerAndroid
-    implementation mobileUiDependencies.daggerSupport
-    kapt mobileUiDependencies.daggerCompiler
-    kapt mobileUiDependencies.daggerProcessor
+    implementation "com.github.bumptech.glide:glide:${rootProject.glideVersion}"
 
-    implementation mobileUiDependencies.rxKotlin
-    implementation mobileUiDependencies.rxAndroid
+    implementation "com.xwray:groupie:${rootProject.groupieVersion}"
 
-    implementation mobileUiDependencies.glide
+    implementation "com.jakewharton.timber:timber:${rootProject.timberVersion}"
 
-    implementation mobileUiDependencies.groupie
+    debugImplementation "nl.littlerobots.rxlint:rxlint:${rootProject.rxLintVersion}"
 
-    implementation mobileUiDependencies.timber
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:${rootProject.leakCanaryVersion}"
+    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:${rootProject.leakCanaryVersion}"
 
-    debugImplementation mobileUiDependencies.rxLint
-
-    debugImplementation mobileUiDependencies.leakCanary
-    releaseImplementation mobileUiDependencies.leakCanary
+    // Unit test dependencies
+    testImplementation "junit:junit:${rootProject.jUnitVersion}"
+    testImplementation "org.jetbrains.kotlin:kotlin-test-junit:${rootProject.kotlinVersion}"
+    testImplementation "com.nhaarman:mockito-kotlin:${rootProject.mockitoKotlinVersion}"
+    testImplementation "org.assertj:assertj-core:${rootProject.assertJVersion}"
+    testImplementation "org.robolectric:robolectric:${rootProject.robolectricVersion}"
+    testImplementation "android.arch.core:core-testing:1.0.0"
 
     // Instrumentation test dependencies
-    androidTestImplementation mobileUiTestDependencies.junit
-    androidTestImplementation mobileUiTestDependencies.mockito
-    androidTestImplementation mobileUiTestDependencies.mockitoAndroid
-    androidTestImplementation(mobileUiTestDependencies.espressoCore) {
+    androidTestImplementation "junit:junit:${rootProject.jUnitVersion}"
+    androidTestImplementation "com.nhaarman:mockito-kotlin:${rootProject.mockitoKotlinVersion}"
+    androidTestImplementation "org.mockito:mockito-android:${rootProject.mockitoAndroidVersion}"
+    androidTestImplementation("com.android.support.test.espresso:espresso-core:${rootProject.espressoVersion}") {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
-    androidTestImplementation(mobileUiTestDependencies.androidRunner) {
+    androidTestImplementation("com.android.support.test:runner:${rootProject.runnerVersion}") {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
-    androidTestImplementation(mobileUiTestDependencies.androidRules) {
+    androidTestImplementation("com.android.support.test:rules:${rootProject.runnerVersion}") {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
-    androidTestImplementation(mobileUiTestDependencies.espressoIntents) {
+    androidTestImplementation("com.android.support.test.espresso:espresso-intents:${rootProject.espressoVersion}") {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
-    androidTestImplementation(mobileUiTestDependencies.espressoContrib) {
+    androidTestImplementation("com.android.support.test.espresso:espresso-contrib:${rootProject.espressoVersion}") {
         exclude module: 'appcompat'
         exclude module: 'appcompat-v7'
         exclude module: 'support-v4'
@@ -144,8 +153,8 @@ dependencies {
         exclude module: 'design'
     }
 
-    kaptTest mobileUiDependencies.daggerCompiler
-    kaptAndroidTest mobileUiDependencies.daggerCompiler
+    kaptTest "com.google.dagger:dagger-compiler:${rootProject.daggerVersion}"
+    kaptAndroidTest "com.google.dagger:dagger-compiler:${rootProject.daggerVersion}"
 }
 
 def getGitHash() {

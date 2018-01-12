@@ -13,23 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.jogan.kotlinplayground
+package com.jogan.kotlinplayground.api
 
-import com.jogan.kotlinplayground.injection.DaggerAppComponent
-import dagger.android.AndroidInjector
-import dagger.android.DaggerApplication
-import javax.inject.Inject
+import com.jogan.kotlinplayground.api.models.TickerModel
+import io.reactivex.Flowable
+import io.reactivex.Single
+import retrofit2.http.GET
+import retrofit2.http.Path
 
-class PlaygroundApplication : DaggerApplication() {
+interface CoinMarketService {
+    @GET("ticker/{id}")
+    fun getTickerForCurrency(@Path("id") id: String): Single<TickerResponse>
 
-    @Inject lateinit var initializers: AppInitializers
-
-    override fun onCreate() {
-        super.onCreate()
-        initializers.init(this)
-    }
-
-    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
-        return DaggerAppComponent.builder().create(this)
+    class TickerResponse {
+        lateinit var ticker: List<TickerModel>
     }
 }

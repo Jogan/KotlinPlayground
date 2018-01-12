@@ -24,3 +24,5 @@ the [spotless](https://github.com/diffplug/spotless) gradle plugin, and the bund
 
 If you find that one of your pull reviews does not pass the CI server check due to a code style conflict, you can
 easily fix it by running: `./gradlew spotlessApply`, or running IntelliJ/Android Studio's code formatter.
+
+### Architecture

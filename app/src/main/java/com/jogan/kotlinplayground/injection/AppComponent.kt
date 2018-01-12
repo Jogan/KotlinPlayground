@@ -16,17 +16,24 @@
 package com.jogan.kotlinplayground.injection
 
 import com.jogan.kotlinplayground.PlaygroundApplication
+import com.jogan.kotlinplayground.injection.module.AppModule
+import com.jogan.kotlinplayground.injection.module.NetworkModule
+import com.jogan.kotlinplayground.injection.module.SchedulerModule
 import dagger.Component
 import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [
-    AndroidSupportInjectionModule::class,
-    AppModule::class
-])
+@Component(
+        modules = [
+            AndroidSupportInjectionModule::class,
+            AppModule::class,
+            NetworkModule::class,
+            SchedulerModule::class
+        ])
 interface AppComponent : AndroidInjector<PlaygroundApplication> {
+
     @Component.Builder
     abstract class Builder : AndroidInjector.Builder<PlaygroundApplication>()
 }

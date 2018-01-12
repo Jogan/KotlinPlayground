@@ -13,23 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.jogan.kotlinplayground
+package com.jogan.kotlinplayground.ui.home
 
-import com.jogan.kotlinplayground.injection.DaggerAppComponent
-import dagger.android.AndroidInjector
-import dagger.android.DaggerApplication
-import javax.inject.Inject
+import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
+import com.jogan.kotlinplayground.R
 
-class PlaygroundApplication : DaggerApplication() {
+import kotlinx.android.synthetic.main.activity_main.*
 
-    @Inject lateinit var initializers: AppInitializers
+class HomeActivity : AppCompatActivity() {
 
-    override fun onCreate() {
-        super.onCreate()
-        initializers.init(this)
-    }
-
-    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
-        return DaggerAppComponent.builder().create(this)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        setSupportActionBar(toolbar)
     }
 }

@@ -13,23 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.jogan.kotlinplayground
+package com.jogan.kotlinplayground.api.mapper
 
-import com.jogan.kotlinplayground.injection.DaggerAppComponent
-import dagger.android.AndroidInjector
-import dagger.android.DaggerApplication
+import com.jogan.kotlinplayground.api.models.TickerModel
+import com.jogan.kotlinplayground.data.model.Ticker
+import com.jogan.kotlinplayground.remote.mapper.EntityMapper
 import javax.inject.Inject
 
-class PlaygroundApplication : DaggerApplication() {
-
-    @Inject lateinit var initializers: AppInitializers
-
-    override fun onCreate() {
-        super.onCreate()
-        initializers.init(this)
-    }
-
-    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
-        return DaggerAppComponent.builder().create(this)
+open class TickerMapper @Inject constructor() : EntityMapper<TickerModel, Ticker> {
+    override fun mapFromRemote(type: TickerModel): Ticker {
+        return Ticker(type.id, type.name, type.symbol, type.rank, type.price_usd, type.price_btc, type.percent_change_1h, type.percent_change_24h, type.percent_change_7d)
     }
 }

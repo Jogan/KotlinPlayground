@@ -13,23 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.jogan.kotlinplayground
+package com.jogan.kotlinplayground.api.models
 
-import com.jogan.kotlinplayground.injection.DaggerAppComponent
-import dagger.android.AndroidInjector
-import dagger.android.DaggerApplication
-import javax.inject.Inject
-
-class PlaygroundApplication : DaggerApplication() {
-
-    @Inject lateinit var initializers: AppInitializers
-
-    override fun onCreate() {
-        super.onCreate()
-        initializers.init(this)
-    }
-
-    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
-        return DaggerAppComponent.builder().create(this)
-    }
-}
+/**
+ * Representation for a [TickerModel] fetched from the API
+ */
+class TickerModel(val id: String,
+                  val name: String,
+                  val symbol: String,
+                  val rank: String,
+                  val price_usd: String,
+                  val price_btc: String,
+                  val percent_change_1h: String,
+                  val percent_change_24h: String,
+                  val percent_change_7d: String)
