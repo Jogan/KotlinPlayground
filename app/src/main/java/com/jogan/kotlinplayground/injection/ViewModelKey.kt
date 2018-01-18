@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 John Hogan.
+ * Copyright 2017 Google, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,19 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.jogan.kotlinplayground.ui.home
 
-import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import com.jogan.kotlinplayground.R
+package com.jogan.kotlinplayground.injection
 
-import kotlinx.android.synthetic.main.activity_main.*
+import android.arch.lifecycle.ViewModel
+import dagger.MapKey
+import kotlin.reflect.KClass
 
-class HomeActivity : AppCompatActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        setSupportActionBar(toolbar)
-    }
-}
+@Target(AnnotationTarget.FUNCTION, AnnotationTarget.PROPERTY_GETTER, AnnotationTarget.PROPERTY_SETTER)
+@Retention(AnnotationRetention.RUNTIME)
+@MapKey
+annotation class ViewModelKey(val value: KClass<out ViewModel>)

@@ -17,7 +17,7 @@ ext {
     rxLintVersion = '1.6'
 
     //Libraries
-    kotlinVersion = '1.2.10'
+    kotlinVersion = '1.2.20'
     rxKotlinVersion = '2.2.0'
     rxAndroidVersion = '2.0.1'
     javaxAnnotationVersion = '1.0'
