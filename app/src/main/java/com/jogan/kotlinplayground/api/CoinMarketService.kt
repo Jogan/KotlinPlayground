@@ -23,9 +23,5 @@ import retrofit2.http.Path
 
 interface CoinMarketService {
     @GET("ticker/{id}")
-    fun getTickerForCurrency(@Path("id") id: String): Single<TickerResponse>
-
-    class TickerResponse {
-        lateinit var ticker: List<TickerModel>
-    }
+    fun getTickerForCurrency(@Path("id") id: String): Single<List<TickerModel>>
 }

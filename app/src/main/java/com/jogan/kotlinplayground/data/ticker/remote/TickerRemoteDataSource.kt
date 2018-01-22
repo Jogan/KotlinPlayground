@@ -13,7 +13,6 @@ class TickerRemoteDataSource @Inject constructor(
 
     override fun getTickerForCurrency(id: String): Single<List<Ticker>> {
         return coinMarketService.getTickerForCurrency(id)
-                .map { it.ticker }
                 .flatMap {
                     Single.just(it.map { tickerMapper.mapFromRemote(it) })
                 }
