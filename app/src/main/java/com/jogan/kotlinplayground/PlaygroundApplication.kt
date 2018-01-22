@@ -16,17 +16,22 @@
 package com.jogan.kotlinplayground
 
 import com.jogan.kotlinplayground.injection.DaggerAppComponent
+import com.squareup.leakcanary.LeakCanary
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
-import javax.inject.Inject
+import timber.log.Timber
 
 class PlaygroundApplication : DaggerApplication() {
 
-    @Inject lateinit var initializers: AppInitializers
-
     override fun onCreate() {
         super.onCreate()
-        initializers.init(this)
+        if (!LeakCanary.isInAnalyzerProcess(this)) {
+            LeakCanary.install(this)
+        }
+
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
+        }
     }
 
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> {

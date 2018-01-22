@@ -16,7 +16,6 @@
 package com.jogan.kotlinplayground.api
 
 import com.jogan.kotlinplayground.api.models.TickerModel
-import io.reactivex.Flowable
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Path

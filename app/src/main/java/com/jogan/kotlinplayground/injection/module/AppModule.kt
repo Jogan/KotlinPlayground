@@ -16,10 +16,7 @@
 package com.jogan.kotlinplayground.injection.module
 
 import android.content.Context
-import com.jogan.kotlinplayground.AppInitializers
-import com.jogan.kotlinplayground.LeakCanaryInitializer
 import com.jogan.kotlinplayground.PlaygroundApplication
-import com.jogan.kotlinplayground.TimberInitializer
 import dagger.Module
 import dagger.Provides
 
@@ -30,11 +27,5 @@ object AppModule {
     @Provides
     fun provideContext(application: PlaygroundApplication): Context {
         return application.applicationContext
-    }
-
-    @JvmStatic
-    @Provides
-    fun provideAppInitializers(leakCanaryInitializer: LeakCanaryInitializer, timberInitializer: TimberInitializer): AppInitializers {
-        return AppInitializers(leakCanaryInitializer, timberInitializer)
     }
 }

@@ -33,7 +33,7 @@ class MainActivity : BaseActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        if(supportFragmentManager.findFragmentById(R.id.contentFrame) == null) {
+        if (supportFragmentManager.findFragmentById(R.id.contentFrame) == null) {
             addFragmentToActivity(supportFragmentManager, BrowseFragment(), R.id.contentFrame)
         }
     }
