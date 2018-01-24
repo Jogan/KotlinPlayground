@@ -2,7 +2,7 @@
 
 ## Important
 
-This app is very much a work in progress and subject to change. At the time of writing this its nothing more than a TextView which displays the price (hopefully large) or magic internet money.
+This app is very much a work in progress and subject to change. At the time of writing this its nothing more than a TextView which displays the price (hopefully large) of magic internet money.
 
 ## Android development
 
