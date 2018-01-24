@@ -1,5 +1,9 @@
 # Kotlin Playground (work-in-progress)
 
+## Important
+
+This app is very much a work in progress and subject to change. At the time of writing this its nothing more than a TextView which displays the price (hopefully large) or magic internet money.
+
 ## Android development
 
 App which attempts to use the latest cutting edge libraries and tools. As a summary:
