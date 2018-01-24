@@ -76,7 +76,7 @@ class BrowseActionsProcessor @Inject constructor(
     internal var actionProcessor =
             ObservableTransformer<BrowseAction, BrowseResult> { actions ->
                 actions.publish {
-                    // Match LoadTasksAction to loadTasksProcessor
+                    // Match LoadTickerAction to loadTickersProcessor
                     it.ofType(BrowseAction.LoadTickerAction::class.java)
                             .compose(loadTickersProcessor)
                             .mergeWith(
