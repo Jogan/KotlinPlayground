@@ -15,12 +15,16 @@
  */
 package com.jogan.kotlinplayground.ui.main.browse
 
+import com.jogan.kotlinplayground.data.model.Ticker
 import com.jogan.kotlinplayground.data.ticker.ITickerRepository
 import com.jogan.kotlinplayground.ui.main.browse.BrowseAction.LoadTickerAction
 import com.jogan.kotlinplayground.ui.main.browse.BrowseResult.LoadTickerResult
 import com.jogan.kotlinplayground.util.schedulers.BaseSchedulerProvider
 import io.reactivex.Observable
 import io.reactivex.ObservableTransformer
+import io.reactivex.Single
+import io.reactivex.functions.BiFunction
+import java.util.*
 import javax.inject.Inject
 
 /**
@@ -37,12 +41,13 @@ class BrowseActionsProcessor @Inject constructor(
     private val loadTickersProcessor =
             ObservableTransformer<LoadTickerAction, BrowseResult> { actions ->
                 actions.flatMap { action ->
-                    tickerRepository.getTickerForCurrency("bitcoin")
+                    Single.zip(tickerRepository.getTickerForCurrency("bitcoin"), tickerRepository.getTickerForCurrency("litecoin"), BiFunction<Ticker, Ticker, Pair<Ticker, Ticker>> { t1, t2 -> Pair(t1, t2) })
                             // Transform the Single to an Observable to allow emission of multiple
                             // events down the stream (e.g. the InFlight event)
                             .toObservable()
+                            .map { pair -> Arrays.asList(pair.first, pair.second) }
                             // Wrap returned data into an immutable object
-                            .map { ticker -> LoadTickerResult.Success(ticker) }
+                            .map { tickers -> LoadTickerResult.Success(tickers) }
                             .cast(LoadTickerResult::class.java)
                             // Wrap any error into an immutable object and pass it down the stream
                             // without crashing.

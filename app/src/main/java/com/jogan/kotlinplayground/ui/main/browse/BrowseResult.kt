@@ -20,7 +20,7 @@ import com.jogan.kotlinplayground.ui.base.mvi.MviResult
 
 sealed class BrowseResult : MviResult {
     sealed class LoadTickerResult : BrowseResult() {
-        data class Success(val tickers: Ticker) : LoadTickerResult()
+        data class Success(val tickers: List<Ticker>) : LoadTickerResult()
         data class Failure(val error: Throwable) : LoadTickerResult()
         object InFlight : LoadTickerResult()
     }

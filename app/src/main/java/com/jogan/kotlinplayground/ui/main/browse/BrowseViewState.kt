@@ -20,14 +20,14 @@ import com.jogan.kotlinplayground.ui.base.mvi.MviViewState
 
 sealed class BrowseViewState(
         val isLoading: Boolean = false,
-        val ticker: Ticker? = null,
+        val tickers: List<Ticker>? = null,
         val error: Throwable? = null
 ) : MviViewState {
     object InProgress : BrowseViewState(true, null, null)
 
     data class Failed(private val throwable: Throwable?) : BrowseViewState(false, null, throwable)
 
-    data class Success(private val result: Ticker?) : BrowseViewState(false, result)
+    data class Success(private val result: List<Ticker>?) : BrowseViewState(false, result)
 
     class Idle : BrowseViewState(false, null, null)
 }

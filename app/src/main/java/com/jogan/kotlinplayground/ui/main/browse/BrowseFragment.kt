@@ -18,9 +18,14 @@ package com.jogan.kotlinplayground.ui.main.browse
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.support.annotation.LayoutRes
+import android.support.constraint.ConstraintSet
+import android.transition.ChangeBounds
+import android.transition.TransitionManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.OvershootInterpolator
 import com.jogan.kotlinplayground.R
 import com.jogan.kotlinplayground.data.model.Ticker
 import com.jogan.kotlinplayground.ui.base.BaseFragment
@@ -33,10 +38,13 @@ import javax.inject.Inject
 
 class BrowseFragment : BaseFragment(), MviView<BrowseIntent, BrowseViewState> {
 
-    @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var viewModel: BrowseViewModel
 
     private val disposables = CompositeDisposable()
+
+    private var selectedView: View? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +58,48 @@ class BrowseFragment : BaseFragment(), MviView<BrowseIntent, BrowseViewState> {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupAnimations();
         bind()
+    }
+
+    private fun setupAnimations() {
+        selectedView = null
+
+        root.setOnClickListener { toDefault() }
+
+        tickerOneImage.setOnClickListener {
+            if (selectedView != tickerOneImage) {
+                updateConstraints(R.layout.fragment_browse_ticker_one)
+                selectedView = tickerOneImage
+            } else {
+                toDefault()
+            }
+        }
+
+        tickerTwoImage.setOnClickListener {
+            if (selectedView != tickerTwoImage) {
+                updateConstraints(R.layout.fragment_browse_ticker_two)
+                selectedView = tickerTwoImage
+            } else {
+                toDefault()
+            }
+        }
+    }
+
+    private fun toDefault() {
+        if (selectedView != null) {
+            updateConstraints(R.layout.fragment_browse)
+            selectedView = null
+        }
+    }
+
+    private fun updateConstraints(@LayoutRes id: Int) {
+        val newConstraintSet = ConstraintSet()
+        newConstraintSet.clone(activity, id)
+        newConstraintSet.applyTo(root)
+        val transition = ChangeBounds()
+        transition.interpolator = OvershootInterpolator()
+        TransitionManager.beginDelayedTransition(root, transition)
     }
 
     /**
@@ -84,17 +133,27 @@ class BrowseFragment : BaseFragment(), MviView<BrowseIntent, BrowseViewState> {
                 setupScreenForErrorState()
             }
             state is BrowseViewState.Success -> {
-                setupScreenForSuccess(state.ticker)
+                setupScreenForSuccess(state.tickers)
             }
         }
     }
 
-    private fun setupScreenForSuccess(ticker: Ticker?) {
+    private fun setupScreenForSuccess(tickers: List<Ticker>?) {
         Timber.d("setupScreenForSuccess")
         progress.visibility = View.GONE
-        if (ticker != null) {
-            tickerText.text = ticker.priceUsd
-            tickerText.visibility = View.VISIBLE
+        tickerOneTitleText.visibility = View.VISIBLE
+        tickerOneImage.visibility = View.VISIBLE
+        tickerOnePriceText.visibility = View.VISIBLE
+        tickerTwoTitleText.visibility = View.VISIBLE
+        tickerTwoImage.visibility = View.VISIBLE
+        tickerTwoPriceText.visibility = View.VISIBLE
+        if (tickers != null) {
+            val tickerOne = tickers.get(0)
+            tickerOneTitleText.text = tickerOne.name
+            tickerOnePriceText.text = tickerOne.priceUsd
+            val tickerTwo = tickers.get(1)
+            tickerTwoTitleText.text = tickerTwo.name
+            tickerTwoPriceText.text = tickerTwo.priceUsd
         }
     }
 
@@ -102,13 +161,23 @@ class BrowseFragment : BaseFragment(), MviView<BrowseIntent, BrowseViewState> {
         Timber.d("setupScreenForErrorState")
         // TODO show error state
         progress.visibility = View.GONE
-        tickerText.visibility = View.GONE
+        tickerOneTitleText.visibility = View.GONE
+        tickerOneImage.visibility = View.GONE
+        tickerOnePriceText.visibility = View.GONE
+        tickerTwoTitleText.visibility = View.GONE
+        tickerTwoImage.visibility = View.GONE
+        tickerTwoPriceText.visibility = View.GONE
     }
 
     private fun setupScreenForLoadingState() {
         Timber.d("setupScreenForLoadingState")
         progress.visibility = View.VISIBLE
-        tickerText.visibility = View.GONE
+        tickerOneTitleText.visibility = View.GONE
+        tickerOneImage.visibility = View.GONE
+        tickerOnePriceText.visibility = View.GONE
+        tickerTwoTitleText.visibility = View.GONE
+        tickerTwoImage.visibility = View.GONE
+        tickerTwoPriceText.visibility = View.GONE
     }
 
     /**
