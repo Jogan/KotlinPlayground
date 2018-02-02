@@ -31,4 +31,10 @@ open class TickerRepository @Inject constructor(
                 .doOnError { Timber.e(it, "error in service") }
                 .map { it.first() }
     }
+
+    override fun getTickers(start: Int, limit: Int): Single<List<Ticker>> {
+        // TODO cache logic
+        return tickerRemoteDataSource.getTickers(start, limit)
+                .doOnError { Timber.e(it, "error in service") }
+    }
 }

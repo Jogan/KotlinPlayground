@@ -97,7 +97,7 @@ open class BrowseViewModel @Inject internal constructor(
 
     private fun actionFromIntent(intent: MviIntent): BrowseAction {
         return when (intent) {
-            is BrowseIntent.InitialIntent -> BrowseAction.LoadTickerAction(true)
+            is BrowseIntent.InitialIntent -> BrowseAction.LoadTickersAction(0, true)
             else -> throw UnsupportedOperationException(
                     "Oops, that looks like an unknown intent: " + intent)
         }

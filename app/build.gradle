@@ -94,9 +94,9 @@ dependencies {
     implementation "android.arch.lifecycle:reactivestreams:${rootProject.archComponentsVersion}"
     implementation "android.arch.paging:runtime:${rootProject.archComponentsPagingVersion}"
     kapt "android.arch.lifecycle:compiler:${rootProject.archComponentsVersion}"
-    implementation "android.arch.persistence.room:runtime:${rootProject.archComponentsVersion}"
-    implementation "android.arch.persistence.room:rxjava2:${rootProject.archComponentsVersion}"
-    kapt "android.arch.persistence.room:compiler:${rootProject.archComponentsVersion}"
+    implementation "android.arch.persistence.room:runtime:${rootProject.roomVersion}"
+    implementation "android.arch.persistence.room:rxjava2:${rootProject.roomVersion}"
+    kapt "android.arch.persistence.room:compiler:${rootProject.roomVersion}"
 
     implementation "com.google.dagger:dagger-android:${rootProject.daggerVersion}"
     implementation "com.google.dagger:dagger-android-support:${rootProject.daggerVersion}"
@@ -119,6 +119,7 @@ dependencies {
     implementation "com.github.bumptech.glide:glide:${rootProject.glideVersion}"
 
     implementation "com.xwray:groupie:${rootProject.groupieVersion}"
+    implementation "com.xwray:groupie-kotlin-android-extensions:${rootProject.groupieVersion}"
 
     implementation "com.jakewharton.timber:timber:${rootProject.timberVersion}"
 
@@ -133,7 +134,7 @@ dependencies {
     testImplementation "com.nhaarman:mockito-kotlin:${rootProject.mockitoKotlinVersion}"
     testImplementation "org.assertj:assertj-core:${rootProject.assertJVersion}"
     testImplementation "org.robolectric:robolectric:${rootProject.robolectricVersion}"
-    testImplementation "android.arch.core:core-testing:1.0.0"
+    testImplementation "android.arch.core:core-testing:${rootProject.archComponentsVersion}"
 
     // Instrumentation test dependencies
     androidTestImplementation "junit:junit:${rootProject.jUnitVersion}"

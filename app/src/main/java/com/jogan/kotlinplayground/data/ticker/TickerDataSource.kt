@@ -20,4 +20,6 @@ import io.reactivex.Single
 
 interface TickerDataSource {
     fun getTickerForCurrency(id: String): Single<List<Ticker>>
+
+    fun getTickers(start: Int, limit: Int): Single<List<Ticker>>
 }

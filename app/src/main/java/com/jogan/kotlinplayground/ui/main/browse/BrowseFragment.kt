@@ -20,16 +20,21 @@ import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.annotation.LayoutRes
 import android.support.constraint.ConstraintSet
+import android.support.v7.widget.LinearLayoutManager
 import android.transition.ChangeBounds
 import android.transition.TransitionManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.OvershootInterpolator
+import android.widget.LinearLayout
 import com.jogan.kotlinplayground.R
 import com.jogan.kotlinplayground.data.model.Ticker
 import com.jogan.kotlinplayground.ui.base.BaseFragment
 import com.jogan.kotlinplayground.ui.base.mvi.MviView
+import com.jogan.kotlinplayground.ui.main.browse.adapter.CoinItem
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.ViewHolder
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.fragment_browse.*
@@ -44,7 +49,8 @@ class BrowseFragment : BaseFragment(), MviView<BrowseIntent, BrowseViewState> {
 
     private val disposables = CompositeDisposable()
 
-    private var selectedView: View? = null
+    private val groupAdapter = GroupAdapter<ViewHolder>()
+    private lateinit var groupLayoutManager: LinearLayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,48 +64,16 @@ class BrowseFragment : BaseFragment(), MviView<BrowseIntent, BrowseViewState> {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupAnimations();
+        setupViews()
         bind()
     }
 
-    private fun setupAnimations() {
-        selectedView = null
-
-        root.setOnClickListener { toDefault() }
-
-        tickerOneImage.setOnClickListener {
-            if (selectedView != tickerOneImage) {
-                updateConstraints(R.layout.fragment_browse_ticker_one)
-                selectedView = tickerOneImage
-            } else {
-                toDefault()
-            }
+    private fun setupViews() {
+        groupLayoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+        recyclerView.apply {
+            layoutManager = groupLayoutManager
+            adapter = groupAdapter
         }
-
-        tickerTwoImage.setOnClickListener {
-            if (selectedView != tickerTwoImage) {
-                updateConstraints(R.layout.fragment_browse_ticker_two)
-                selectedView = tickerTwoImage
-            } else {
-                toDefault()
-            }
-        }
-    }
-
-    private fun toDefault() {
-        if (selectedView != null) {
-            updateConstraints(R.layout.fragment_browse)
-            selectedView = null
-        }
-    }
-
-    private fun updateConstraints(@LayoutRes id: Int) {
-        val newConstraintSet = ConstraintSet()
-        newConstraintSet.clone(activity, id)
-        newConstraintSet.applyTo(root)
-        val transition = ChangeBounds()
-        transition.interpolator = OvershootInterpolator()
-        TransitionManager.beginDelayedTransition(root, transition)
     }
 
     /**
@@ -141,19 +115,12 @@ class BrowseFragment : BaseFragment(), MviView<BrowseIntent, BrowseViewState> {
     private fun setupScreenForSuccess(tickers: List<Ticker>?) {
         Timber.d("setupScreenForSuccess")
         progress.visibility = View.GONE
-        tickerOneTitleText.visibility = View.VISIBLE
-        tickerOneImage.visibility = View.VISIBLE
-        tickerOnePriceText.visibility = View.VISIBLE
-        tickerTwoTitleText.visibility = View.VISIBLE
-        tickerTwoImage.visibility = View.VISIBLE
-        tickerTwoPriceText.visibility = View.VISIBLE
-        if (tickers != null) {
-            val tickerOne = tickers.get(0)
-            tickerOneTitleText.text = tickerOne.name
-            tickerOnePriceText.text = tickerOne.priceUsd
-            val tickerTwo = tickers.get(1)
-            tickerTwoTitleText.text = tickerTwo.name
-            tickerTwoPriceText.text = tickerTwo.priceUsd
+        recyclerView.visibility = View.VISIBLE
+        // Add tickers to our list
+        tickers?.forEach {
+            CoinItem(it).apply {
+                groupAdapter.add(this)
+            }
         }
     }
 
@@ -161,23 +128,13 @@ class BrowseFragment : BaseFragment(), MviView<BrowseIntent, BrowseViewState> {
         Timber.d("setupScreenForErrorState")
         // TODO show error state
         progress.visibility = View.GONE
-        tickerOneTitleText.visibility = View.GONE
-        tickerOneImage.visibility = View.GONE
-        tickerOnePriceText.visibility = View.GONE
-        tickerTwoTitleText.visibility = View.GONE
-        tickerTwoImage.visibility = View.GONE
-        tickerTwoPriceText.visibility = View.GONE
+        recyclerView.visibility = View.GONE
     }
 
     private fun setupScreenForLoadingState() {
         Timber.d("setupScreenForLoadingState")
         progress.visibility = View.VISIBLE
-        tickerOneTitleText.visibility = View.GONE
-        tickerOneImage.visibility = View.GONE
-        tickerOnePriceText.visibility = View.GONE
-        tickerTwoTitleText.visibility = View.GONE
-        tickerTwoImage.visibility = View.GONE
-        tickerTwoPriceText.visibility = View.GONE
+        recyclerView.visibility = View.GONE
     }
 
     /**

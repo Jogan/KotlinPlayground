@@ -19,8 +19,12 @@ import com.jogan.kotlinplayground.api.models.TickerModel
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface CoinMarketService {
     @GET("ticker/{id}")
     fun getTickerForCurrency(@Path("id") id: String): Single<List<TickerModel>>
+
+    @GET("ticker/")
+    fun getTickers(@Query("start") start: Int, @Query("limit") limit: Int): Single<List<TickerModel>>
 }

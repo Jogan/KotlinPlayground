@@ -17,7 +17,7 @@ package com.jogan.kotlinplayground.ui.main.browse
 
 import com.jogan.kotlinplayground.data.model.Ticker
 import com.jogan.kotlinplayground.data.ticker.ITickerRepository
-import com.jogan.kotlinplayground.ui.main.browse.BrowseAction.LoadTickerAction
+import com.jogan.kotlinplayground.ui.main.browse.BrowseAction.LoadTickersAction
 import com.jogan.kotlinplayground.ui.main.browse.BrowseResult.LoadTickerResult
 import com.jogan.kotlinplayground.util.schedulers.BaseSchedulerProvider
 import io.reactivex.Observable
@@ -38,14 +38,19 @@ class BrowseActionsProcessor @Inject constructor(
         private val tickerRepository: ITickerRepository,
         private val schedulerProvider: BaseSchedulerProvider) {
 
+
+    /**
+     * Number of elements to load per request
+     */
+    private val PAGE_LIMIT = 10
+
     private val loadTickersProcessor =
-            ObservableTransformer<LoadTickerAction, BrowseResult> { actions ->
+            ObservableTransformer<LoadTickersAction, BrowseResult> { actions ->
                 actions.flatMap { action ->
-                    Single.zip(tickerRepository.getTickerForCurrency("bitcoin"), tickerRepository.getTickerForCurrency("litecoin"), BiFunction<Ticker, Ticker, Pair<Ticker, Ticker>> { t1, t2 -> Pair(t1, t2) })
+                    tickerRepository.getTickers(action.start, PAGE_LIMIT)
                             // Transform the Single to an Observable to allow emission of multiple
                             // events down the stream (e.g. the InFlight event)
                             .toObservable()
-                            .map { pair -> Arrays.asList(pair.first, pair.second) }
                             // Wrap returned data into an immutable object
                             .map { tickers -> LoadTickerResult.Success(tickers) }
                             .cast(LoadTickerResult::class.java)
@@ -81,12 +86,12 @@ class BrowseActionsProcessor @Inject constructor(
     internal var actionProcessor =
             ObservableTransformer<BrowseAction, BrowseResult> { actions ->
                 actions.publish {
-                    // Match LoadTickerAction to loadTickersProcessor
-                    it.ofType(BrowseAction.LoadTickerAction::class.java)
+                    // Match LoadTickersAction to loadTickersProcessor
+                    it.ofType(BrowseAction.LoadTickersAction::class.java)
                             .compose(loadTickersProcessor)
                             .mergeWith(
                                     // Error for not implemented actions
-                                    it.filter { v -> v !is LoadTickerAction }
+                                    it.filter { v -> v !is LoadTickersAction }
                                             .flatMap { w ->
                                                 Observable.error<BrowseResult>(
                                                         IllegalArgumentException("Unknown Action type: $w"))

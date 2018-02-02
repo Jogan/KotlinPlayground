@@ -20,6 +20,10 @@ import com.jogan.kotlinplayground.data.ticker.TickerDataSource
 import io.reactivex.Single
 
 class TickerLocalDataSource : TickerDataSource {
+    override fun getTickers(start: Int, limit: Int): Single<List<Ticker>> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     override fun getTickerForCurrency(id: String): Single<List<Ticker>> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
