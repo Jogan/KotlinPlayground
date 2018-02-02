@@ -64,6 +64,7 @@ open class BrowseViewModel @Inject internal constructor(
                     }
                 }
             }
+
     private val statesSubject: Observable<BrowseViewState> = compose()
 
     override fun processIntents(intents: Observable<BrowseIntent>) {
@@ -98,6 +99,7 @@ open class BrowseViewModel @Inject internal constructor(
     private fun actionFromIntent(intent: MviIntent): BrowseAction {
         return when (intent) {
             is BrowseIntent.InitialIntent -> BrowseAction.LoadTickersAction(0, true)
+            is BrowseIntent.RefreshIntent -> BrowseAction.LoadTickersAction(intent.offset, intent.forceUpdate)
             else -> throw UnsupportedOperationException(
                     "Oops, that looks like an unknown intent: " + intent)
         }

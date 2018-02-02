@@ -15,7 +15,7 @@ App which attempts to use the latest cutting edge libraries and tools. As a summ
  * Uses all of the [Architecture Components](https://developer.android.com/topic/libraries/architecture/): Room, LiveData and Lifecycle-components
  * Uses [dagger-android](https://google.github.io/dagger/android.html) for dependency injection
  * Uses [Glide](https://github.com/bumptech/glide) for image loading
- * Uses [Groupie](https://github.com/lisawray/groupie) for RecyclerView layouts with Kotlin support
+ * Uses [Groupie](https://github.com/lisawray/groupie) for any complex RecyclerView layouts with Kotlin support
 
 ## Development setup
 

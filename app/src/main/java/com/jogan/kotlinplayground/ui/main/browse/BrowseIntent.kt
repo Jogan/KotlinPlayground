@@ -19,4 +19,6 @@ import com.jogan.kotlinplayground.ui.base.mvi.MviIntent
 
 sealed class BrowseIntent : MviIntent {
     object InitialIntent : BrowseIntent()
+
+    data class RefreshIntent(val forceUpdate: Boolean, val offset: Int) : BrowseIntent()
 }

@@ -28,6 +28,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.OvershootInterpolator
 import android.widget.LinearLayout
+import com.jakewharton.rxbinding2.support.v4.widget.RxSwipeRefreshLayout
 import com.jogan.kotlinplayground.R
 import com.jogan.kotlinplayground.data.model.Ticker
 import com.jogan.kotlinplayground.ui.base.BaseFragment
@@ -37,6 +38,7 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.fragment_browse.*
 import timber.log.Timber
 import javax.inject.Inject
@@ -48,7 +50,9 @@ class BrowseFragment : BaseFragment(), MviView<BrowseIntent, BrowseViewState> {
     private lateinit var viewModel: BrowseViewModel
 
     private val disposables = CompositeDisposable()
+    private val refreshIntentPublisher = PublishSubject.create<BrowseIntent.RefreshIntent>()
 
+    // Views
     private val groupAdapter = GroupAdapter<ViewHolder>()
     private lateinit var groupLayoutManager: LinearLayoutManager
 
@@ -66,6 +70,18 @@ class BrowseFragment : BaseFragment(), MviView<BrowseIntent, BrowseViewState> {
         super.onViewCreated(view, savedInstanceState)
         setupViews()
         bind()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // conflicting with the initial intent but needed when coming back from the
+        // an "update" activity to refresh the list.
+        //refreshIntentPublisher.onNext(BrowseIntent.RefreshIntent(false))
+    }
+
+    override fun onDestroy() {
+        disposables.dispose()
+        super.onDestroy()
     }
 
     private fun setupViews() {
@@ -89,16 +105,19 @@ class BrowseFragment : BaseFragment(), MviView<BrowseIntent, BrowseViewState> {
         viewModel.processIntents(intents())
     }
 
-    override fun onDestroy() {
-        disposables.dispose()
-        super.onDestroy()
+    override fun intents(): Observable<BrowseIntent> {
+        return Observable.merge(initialIntent(), refreshIntent())
     }
 
-    override fun intents(): Observable<BrowseIntent> {
-        return Observable.merge(initialIntent(), Observable.empty())
+    private fun refreshIntent(): Observable<BrowseIntent.RefreshIntent> {
+        return RxSwipeRefreshLayout.refreshes(swipeRefreshLayout)
+                .map { BrowseIntent.RefreshIntent(false, 0 /* TODO load correct offset/start */) }
+                .mergeWith(refreshIntentPublisher)
     }
 
     override fun render(state: BrowseViewState) {
+        swipeRefreshLayout.isRefreshing = state.isLoading
+
         when {
             state.isLoading -> {
                 setupScreenForLoadingState()

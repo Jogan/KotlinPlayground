@@ -105,8 +105,9 @@ dependencies {
 
     implementation "io.reactivex.rxjava2:rxkotlin:${rootProject.rxKotlinVersion}"
     implementation "io.reactivex.rxjava2:rxandroid:${rootProject.rxAndroidVersion}"
+    implementation "com.jakewharton.rxbinding2:rxbinding-kotlin:${rootProject.rxBindingVersion}"
+    implementation "com.jakewharton.rxbinding2:rxbinding-support-v4-kotlin:${rootProject.rxBindingVersion}"
 
-    //implementation domainDependencies.javaxAnnotation
     implementation "javax.inject:javax.inject:${rootProject.javaxInjectVersion}"
 
     implementation "com.squareup.moshi:moshi:${rootProject.moshiVersion}"
