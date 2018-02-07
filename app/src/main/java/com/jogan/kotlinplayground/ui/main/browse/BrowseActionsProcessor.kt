@@ -34,7 +34,6 @@ class BrowseActionsProcessor @Inject constructor(
         private val tickerRepository: ITickerRepository,
         private val schedulerProvider: BaseSchedulerProvider) {
 
-
     /**
      * Number of elements to load per request
      */
