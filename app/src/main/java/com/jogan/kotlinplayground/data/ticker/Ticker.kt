@@ -13,7 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.jogan.kotlinplayground.data.model
+package com.jogan.kotlinplayground.data.ticker
+
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.PrimaryKey
 
 /**
  * Representation for a [Ticker] fetched from an external layer data source
@@ -21,7 +24,8 @@ package com.jogan.kotlinplayground.data.model
  * NOTE: marking the class with "data" gives us immutable and the compiler automatically derives some useful members
  * from the properties (equals/hashCode, toString, copy)
  */
-data class Ticker(val id: String,
+@Entity(tableName = "tickers")
+data class Ticker(@PrimaryKey val id: String,
                   val name: String,
                   val symbol: String,
                   val rank: String,

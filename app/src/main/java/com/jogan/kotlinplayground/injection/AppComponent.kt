@@ -16,11 +16,7 @@
 package com.jogan.kotlinplayground.injection
 
 import com.jogan.kotlinplayground.PlaygroundApplication
-import com.jogan.kotlinplayground.injection.module.AppModule
-import com.jogan.kotlinplayground.injection.module.DataModule
-import com.jogan.kotlinplayground.injection.module.NetworkModule
-import com.jogan.kotlinplayground.injection.module.ViewModelBuilder
-import com.jogan.kotlinplayground.injection.module.SchedulerModule
+import com.jogan.kotlinplayground.injection.module.*
 import com.jogan.kotlinplayground.ui.main.MainBuilder
 import dagger.Component
 import dagger.android.AndroidInjector
@@ -34,6 +30,7 @@ import javax.inject.Singleton
             AppModule::class,
             ViewModelBuilder::class,
             DataModule::class,
+            DatabaseModule::class,
             MainBuilder::class,
             NetworkModule::class,
             SchedulerModule::class

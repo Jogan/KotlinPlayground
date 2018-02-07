@@ -1,7 +1,7 @@
 package com.jogan.kotlinplayground.ui.main.browse
 
 import com.jogan.kotlinplayground.TickerFactory
-import com.jogan.kotlinplayground.data.model.Ticker
+import com.jogan.kotlinplayground.data.ticker.Ticker
 import com.jogan.kotlinplayground.data.ticker.TickerRepository
 import com.jogan.kotlinplayground.util.schedulers.BaseSchedulerProvider
 import com.jogan.kotlinplayground.util.schedulers.ImmediateSchedulerProvider
@@ -13,6 +13,7 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
+import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mock
 
@@ -36,8 +37,8 @@ class BrowseViewModelTest {
 
     @Test
     fun initialIntentReturnsSuccess() {
-        val ticker = TickerFactory.makeTicker()
-        stubGetTickerForCurrency(Single.just(ticker))
+        val tickers = TickerFactory.makeTickerList(3)
+        stubGetTickerForCurrency(Single.just(tickers))
 
         val testObserver = browseViewModel.states().test()
 
@@ -48,8 +49,8 @@ class BrowseViewModelTest {
 
     @Test
     fun initialIntentWhenSuccessIsNotLoading() {
-        val ticker = TickerFactory.makeTicker()
-        stubGetTickerForCurrency(Single.just(ticker))
+        val tickers = TickerFactory.makeTickerList(3)
+        stubGetTickerForCurrency(Single.just(tickers))
 
         val testObserver = browseViewModel.states().test()
 
@@ -60,14 +61,14 @@ class BrowseViewModelTest {
 
     @Test
     fun initialIntentReturnsData() {
-        val ticker = TickerFactory.makeTicker()
-        stubGetTickerForCurrency(Single.just(ticker))
+        val tickers = TickerFactory.makeTickerList(3)
+        stubGetTickerForCurrency(Single.just(tickers))
 
         val testObserver = browseViewModel.states().test()
 
         browseViewModel.processIntents(Observable.just(BrowseIntent.InitialIntent))
 
-        testObserver.assertValueAt(2, { it.ticker == ticker })
+        testObserver.assertValueAt(2, { it.tickers == tickers })
     }
 
     @Test
@@ -100,13 +101,13 @@ class BrowseViewModelTest {
 
         browseViewModel.processIntents(Observable.just(BrowseIntent.InitialIntent))
 
-        testObserver.assertValueAt(2, { it.ticker == null })
+        testObserver.assertValueAt(2, { it.tickers == null })
     }
 
     @Test
     fun initialIntentReturnsLoading() {
-        val ticker = TickerFactory.makeTicker()
-        stubGetTickerForCurrency(Single.just(ticker))
+        val tickers = TickerFactory.makeTickerList(3)
+        stubGetTickerForCurrency(Single.just(tickers))
 
         val testObserver = browseViewModel.states().test()
 
@@ -117,8 +118,8 @@ class BrowseViewModelTest {
 
     @Test
     fun initialIntentBeginsAsIdle() {
-        val ticker = TickerFactory.makeTicker()
-        stubGetTickerForCurrency(Single.just(ticker))
+        val tickers = TickerFactory.makeTickerList(3)
+        stubGetTickerForCurrency(Single.just(tickers))
 
         val testObserver = browseViewModel.states().test()
 
@@ -131,8 +132,8 @@ class BrowseViewModelTest {
 
     @Test
     fun initialIntentEmitsCorrectViewStates() {
-        val ticker = TickerFactory.makeTicker()
-        stubGetTickerForCurrency(Single.just(ticker))
+        val tickers = TickerFactory.makeTickerList(3)
+        stubGetTickerForCurrency(Single.just(tickers))
 
         val testObserver = browseViewModel.states().test()
 
@@ -144,8 +145,8 @@ class BrowseViewModelTest {
         testObserver.assertNoErrors()
     }
 
-    private fun stubGetTickerForCurrency(single: Single<Ticker>) {
-        whenever(tickerRepository.getTickerForCurrency(anyString()))
+    private fun stubGetTickerForCurrency(single: Single<List<Ticker>>) {
+        whenever(tickerRepository.getTickers(anyInt(), anyInt()))
                 .thenReturn(single)
     }
 }

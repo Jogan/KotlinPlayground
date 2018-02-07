@@ -17,7 +17,7 @@ package com.jogan.kotlinplayground.data.ticker.remote
 
 import com.jogan.kotlinplayground.api.CoinMarketService
 import com.jogan.kotlinplayground.api.mapper.TickerMapper
-import com.jogan.kotlinplayground.data.model.Ticker
+import com.jogan.kotlinplayground.data.ticker.Ticker
 import com.jogan.kotlinplayground.data.ticker.TickerDataSource
 import io.reactivex.Single
 import javax.inject.Inject

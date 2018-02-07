@@ -15,7 +15,6 @@
  */
 package com.jogan.kotlinplayground.data.ticker
 
-import com.jogan.kotlinplayground.data.model.Ticker
 import io.reactivex.Single
 import timber.log.Timber
 import javax.inject.Inject

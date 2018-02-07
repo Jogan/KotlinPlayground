@@ -25,6 +25,9 @@ interface CoinMarketService {
     @GET("ticker/{id}")
     fun getTickerForCurrency(@Path("id") id: String): Single<List<TickerModel>>
 
+    /**
+     * Passing 0 to each query will return all coins from API
+     */
     @GET("ticker/")
     fun getTickers(@Query("start") start: Int, @Query("limit") limit: Int): Single<List<TickerModel>>
 }

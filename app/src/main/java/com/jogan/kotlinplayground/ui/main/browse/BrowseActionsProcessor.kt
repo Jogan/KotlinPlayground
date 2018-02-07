@@ -15,16 +15,12 @@
  */
 package com.jogan.kotlinplayground.ui.main.browse
 
-import com.jogan.kotlinplayground.data.model.Ticker
 import com.jogan.kotlinplayground.data.ticker.ITickerRepository
 import com.jogan.kotlinplayground.ui.main.browse.BrowseAction.LoadTickersAction
 import com.jogan.kotlinplayground.ui.main.browse.BrowseResult.LoadTickerResult
 import com.jogan.kotlinplayground.util.schedulers.BaseSchedulerProvider
 import io.reactivex.Observable
 import io.reactivex.ObservableTransformer
-import io.reactivex.Single
-import io.reactivex.functions.BiFunction
-import java.util.*
 import javax.inject.Inject
 
 /**

@@ -1,11 +1,9 @@
 package com.jogan.kotlinplayground.injection
 
 import android.app.Application
+import android.arch.persistence.room.Database
 import com.jogan.kotlinplayground.data.ticker.ITickerRepository
-import com.jogan.kotlinplayground.injection.module.TestAppModule
-import com.jogan.kotlinplayground.injection.module.TestDataModule
-import com.jogan.kotlinplayground.injection.module.TestSchedulerModule
-import com.jogan.kotlinplayground.injection.module.ViewModelBuilder
+import com.jogan.kotlinplayground.injection.module.*
 import com.jogan.kotlinplayground.test.TestApplication
 import com.jogan.kotlinplayground.ui.main.MainBuilder
 import dagger.BindsInstance
@@ -20,6 +18,7 @@ import javax.inject.Singleton
             TestAppModule::class,
             AndroidSupportInjectionModule::class,
             ViewModelBuilder::class,
+            DatabaseModule::class,
             MainBuilder::class,
             TestDataModule::class,
             TestSchedulerModule::class

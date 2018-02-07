@@ -18,6 +18,7 @@ ext {
 
     //Libraries
     kotlinVersion = '1.2.21'
+    androidKtxVersion = '0.1'
     rxKotlinVersion = '2.2.0'
     rxAndroidVersion = '2.0.1'
     rxBindingVersion = '2.1.0'
