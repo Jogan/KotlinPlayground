@@ -38,8 +38,8 @@ abstract class TickerDao {
     @Query("SELECT * FROM tickers WHERE name LIKE :search OR symbol LIKE :search")
     abstract fun findAllTickersWithName(search: String): Flowable<List<TickerTuple>>
 
-    @Query("SELECT COUNT(1) FROM tickers")
-    abstract fun tickerCount(): Single<List<Int>>
+    @Query("SELECT COUNT(*) FROM tickers")
+    abstract fun tickerCount(): Single<Int>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract fun insertTicker(ticker: Ticker)

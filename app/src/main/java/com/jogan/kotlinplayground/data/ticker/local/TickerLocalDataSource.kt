@@ -27,11 +27,10 @@ class TickerLocalDataSource @Inject constructor(
         private val tickerDao: TickerDao)
     : TickerDataSource {
 
-    // FIXME to optimize check for tickers via SQL using COUNT
     override fun hasTickers(): Single<Boolean> {
-        return tickerDao.getAllTickers()
-                .doOnSuccess { it.forEach({Timber.d("found ticker -> %s", it.toString())}) }
-                .map { !it.isEmpty() }
+        return tickerDao.tickerCount()
+                .doOnSuccess { Timber.d("## tickerCount = %s", it) }
+                .map { it > 0 }
     }
 
     override fun saveTickers(tickers: List<Ticker>) : Completable {
