@@ -17,12 +17,15 @@ package com.jogan.kotlinplayground.injection.module
 
 import com.jogan.kotlinplayground.api.CoinMarketService
 import com.jogan.kotlinplayground.api.mapper.TickerMapper
+import com.jogan.kotlinplayground.data.db.TickerDao
 import com.jogan.kotlinplayground.data.ticker.ITickerRepository
 import com.jogan.kotlinplayground.data.ticker.TickerDataSource
 import com.jogan.kotlinplayground.data.ticker.TickerRepository
+import com.jogan.kotlinplayground.data.ticker.local.TickerLocalDataSource
 import com.jogan.kotlinplayground.data.ticker.remote.TickerRemoteDataSource
 import dagger.Module
 import dagger.Provides
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -38,6 +41,7 @@ object DataModule {
     @JvmStatic
     @Provides
     @Singleton
+    @Named("remote")
     fun provideTickerRemoteDataSource(coinMarketService: CoinMarketService, tickerMapper: TickerMapper): TickerDataSource {
         return TickerRemoteDataSource(coinMarketService, tickerMapper)
     }
@@ -45,7 +49,18 @@ object DataModule {
     @JvmStatic
     @Provides
     @Singleton
-    fun provideTickerRepository(tickerRemoteDataSource: TickerRemoteDataSource): ITickerRepository {
-        return TickerRepository(tickerRemoteDataSource)
+    @Named("local")
+    fun provideTickerLocalDataSource(tickerDao: TickerDao): TickerDataSource {
+        return TickerLocalDataSource(tickerDao)
+    }
+
+    @JvmStatic
+    @Provides
+    @Singleton
+    fun provideTickerRepository(
+            tickerRemoteDataSource: TickerRemoteDataSource,
+            tickerLocalDataSource: TickerLocalDataSource)
+            : ITickerRepository {
+        return TickerRepository(tickerRemoteDataSource, tickerLocalDataSource)
     }
 }

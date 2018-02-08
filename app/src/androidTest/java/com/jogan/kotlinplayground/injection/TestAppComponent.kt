@@ -23,7 +23,7 @@ import com.jogan.kotlinplayground.injection.module.TestDataModule
 import com.jogan.kotlinplayground.injection.module.ViewModelBuilder
 import com.jogan.kotlinplayground.injection.module.TestSchedulerModule
 import com.jogan.kotlinplayground.test.TestApplication
-import com.jogan.kotlinplayground.ui.main.MainBuilder
+import com.jogan.kotlinplayground.ui.home.HomeBuilder
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
@@ -37,7 +37,7 @@ import javax.inject.Singleton
             AndroidSupportInjectionModule::class,
             ViewModelBuilder::class,
             DatabaseModule::class,
-            MainBuilder::class,
+            HomeBuilder::class,
             TestDataModule::class,
             TestSchedulerModule::class
         ])

@@ -1,12 +1,12 @@
 {
   "formatVersion": 1,
   "database": {
-    "version": 1,
-    "identityHash": "77190a55fddc4c2535634923fd4cb8d6",
+    "version": 2,
+    "identityHash": "aee10f659859c9939ec0cdedd50d55bf",
     "entities": [
       {
         "tableName": "tickers",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `name` TEXT NOT NULL, `symbol` TEXT NOT NULL, `rank` TEXT NOT NULL, `priceUsd` TEXT, `priceBtc` TEXT, `percentChange1h` TEXT, `percentChange24h` TEXT, `percentChange7d` TEXT, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `name` TEXT NOT NULL, `symbol` TEXT NOT NULL, `rank` TEXT NOT NULL, `priceUsd` TEXT NOT NULL, `priceBtc` TEXT NOT NULL, `percentChange1h` TEXT, `percentChange24h` TEXT, `percentChange7d` TEXT, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -36,13 +36,13 @@
             "fieldPath": "priceUsd",
             "columnName": "priceUsd",
             "affinity": "TEXT",
-            "notNull": false
+            "notNull": true
           },
           {
             "fieldPath": "priceBtc",
             "columnName": "priceBtc",
             "affinity": "TEXT",
-            "notNull": false
+            "notNull": true
           },
           {
             "fieldPath": "percentChange1h",
@@ -75,7 +75,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"77190a55fddc4c2535634923fd4cb8d6\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"aee10f659859c9939ec0cdedd50d55bf\")"
     ]
   }
 }

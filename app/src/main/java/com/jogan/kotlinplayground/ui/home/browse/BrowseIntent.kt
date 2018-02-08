@@ -13,17 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.jogan.kotlinplayground.data.ticker
+package com.jogan.kotlinplayground.ui.home.browse
 
-import io.reactivex.Completable
-import io.reactivex.Single
+import com.jogan.kotlinplayground.ui.base.mvi.MviIntent
 
-interface TickerDataSource {
-    fun getTickerForCurrency(id: String): Single<List<Ticker>>
+sealed class BrowseIntent : MviIntent {
+    object InitialIntent : BrowseIntent()
 
-    fun getTickers(start: Int, limit: Int): Single<List<Ticker>>
-
-    fun hasTickers(): Single<Boolean>
-
-    fun saveTickers(tickers: List<Ticker>) : Completable
+    data class RefreshIntent(val forceUpdate: Boolean, val offset: Int) : BrowseIntent()
 }

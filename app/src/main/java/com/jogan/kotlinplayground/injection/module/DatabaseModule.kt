@@ -30,7 +30,9 @@ object DatabaseModule {
     @Provides
     @Singleton
     fun provideDatabase(application: Application): PlaygroundDatabase =
-            Room.databaseBuilder(application, PlaygroundDatabase::class.java, "playground.db").build()
+            Room.databaseBuilder(application, PlaygroundDatabase::class.java, "playground.db")
+                    .fallbackToDestructiveMigration()
+                    .build()
 
     @JvmStatic
     @Provides

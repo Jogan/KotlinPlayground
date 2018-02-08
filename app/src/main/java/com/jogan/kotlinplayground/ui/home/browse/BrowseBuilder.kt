@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.jogan.kotlinplayground.ui.main.browse
+package com.jogan.kotlinplayground.ui.home.browse
 
 import android.arch.lifecycle.ViewModel
 import com.jogan.kotlinplayground.injection.ViewModelKey

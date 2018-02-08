@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.jogan.kotlinplayground.ui.main.browse
+package com.jogan.kotlinplayground.ui.home.browse
 
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
@@ -27,7 +27,7 @@ import com.jogan.kotlinplayground.R
 import com.jogan.kotlinplayground.data.ticker.Ticker
 import com.jogan.kotlinplayground.ui.base.BaseFragment
 import com.jogan.kotlinplayground.ui.base.mvi.MviView
-import com.jogan.kotlinplayground.ui.main.browse.adapter.CoinItem
+import com.jogan.kotlinplayground.ui.home.browse.adapter.CoinItem
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
 import io.reactivex.Observable
@@ -103,6 +103,16 @@ class BrowseFragment : BaseFragment(), MviView<BrowseIntent, BrowseViewState> {
         return Observable.merge(initialIntent(), refreshIntent())
     }
 
+    /**
+     * The initial Intent the [MviView] emit to convey to the [MviViewModel]
+     * that it is ready to receive data.
+     * This initial Intent is also used to pass any parameters the [MviViewModel] might need
+     * to render the initial [MviViewState] (e.g. some id to load specific data]).
+     */
+    private fun initialIntent(): Observable<BrowseIntent.InitialIntent> {
+        return Observable.just(BrowseIntent.InitialIntent)
+    }
+
     private fun refreshIntent(): Observable<BrowseIntent.RefreshIntent> {
         return RxSwipeRefreshLayout.refreshes(swipeRefreshLayout)
                 .map { BrowseIntent.RefreshIntent(false, 0 /* TODO load correct offset/start */) }
@@ -148,15 +158,5 @@ class BrowseFragment : BaseFragment(), MviView<BrowseIntent, BrowseViewState> {
         Timber.d("setupScreenForLoadingState")
         progress.visibility = View.VISIBLE
         recyclerView.visibility = View.GONE
-    }
-
-    /**
-     * The initial Intent the [MviView] emit to convey to the [MviViewModel]
-     * that it is ready to receive data.
-     * This initial Intent is also used to pass any parameters the [MviViewModel] might need
-     * to render the initial [MviViewState] (e.g. some id to load specific data]).
-     */
-    private fun initialIntent(): Observable<BrowseIntent.InitialIntent> {
-        return Observable.just(BrowseIntent.InitialIntent)
     }
 }

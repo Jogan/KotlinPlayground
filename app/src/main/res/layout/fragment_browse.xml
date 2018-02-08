@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.jogan.kotlinplayground.ui.main.MainActivity">
+    tools:context="com.jogan.kotlinplayground.ui.home.HomeActivity">
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshLayout"

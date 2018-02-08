@@ -13,15 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.jogan.kotlinplayground.ui.main.browse
+package com.jogan.kotlinplayground.ui.home.browse
 
-import com.jogan.kotlinplayground.data.ticker.Ticker
-import com.jogan.kotlinplayground.ui.base.mvi.MviResult
+import com.jogan.kotlinplayground.ui.base.mvi.MviAction
 
-sealed class BrowseResult : MviResult {
-    sealed class LoadTickerResult : BrowseResult() {
-        data class Success(val tickers: List<Ticker>) : LoadTickerResult()
-        data class Failure(val error: Throwable) : LoadTickerResult()
-        object InFlight : LoadTickerResult()
-    }
+sealed class BrowseAction : MviAction {
+    data class LoadTickersAction(val start: Int, val forceUpdate: Boolean) : BrowseAction()
 }

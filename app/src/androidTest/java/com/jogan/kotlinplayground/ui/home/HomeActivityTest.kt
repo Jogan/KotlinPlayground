@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.jogan.kotlinplayground.ui.main
+package com.jogan.kotlinplayground.ui.home
 
 import android.support.test.filters.LargeTest
 import android.support.test.rule.ActivityTestRule
@@ -30,10 +30,10 @@ import org.mockito.ArgumentMatchers.anyInt
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
-class MainActivityTest {
+class HomeActivityTest {
     @Rule
     @JvmField
-    val activity = ActivityTestRule<MainActivity>(MainActivity::class.java, false, false)
+    val activity = ActivityTestRule<HomeActivity>(HomeActivity::class.java, false, false)
 
     @Test
     fun activityLaunches() {

@@ -13,16 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.jogan.kotlinplayground.ui.main
+package com.jogan.kotlinplayground.ui.home
 
-import com.jogan.kotlinplayground.ui.main.browse.BrowseBuilder
+import android.arch.lifecycle.ViewModel
+import com.jogan.kotlinplayground.injection.ViewModelKey
+import com.jogan.kotlinplayground.ui.home.browse.BrowseBuilder
+import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
+import dagger.multibindings.IntoMap
 
 @Module
-internal abstract class MainBuilder {
+internal abstract class HomeBuilder {
     @ContributesAndroidInjector(modules = [
         BrowseBuilder::class
     ])
-    internal abstract fun mainActivity(): MainActivity
+    internal abstract fun homeActivity(): HomeActivity
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(HomeViewModel::class)
+    abstract fun bindHomeViewModel(viewModel: HomeViewModel): ViewModel
 }

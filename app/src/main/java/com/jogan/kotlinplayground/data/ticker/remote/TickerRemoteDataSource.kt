@@ -19,12 +19,21 @@ import com.jogan.kotlinplayground.api.CoinMarketService
 import com.jogan.kotlinplayground.api.mapper.TickerMapper
 import com.jogan.kotlinplayground.data.ticker.Ticker
 import com.jogan.kotlinplayground.data.ticker.TickerDataSource
+import io.reactivex.Completable
 import io.reactivex.Single
 import javax.inject.Inject
 
 class TickerRemoteDataSource @Inject constructor(
         private val coinMarketService: CoinMarketService,
         private val tickerMapper: TickerMapper) : TickerDataSource {
+
+    override fun hasTickers(): Single<Boolean> {
+        return Single.just(false)
+    }
+
+    override fun saveTickers(tickers: List<Ticker>): Completable {
+        return Completable.complete()
+    }
 
     override fun getTickers(start: Int, limit: Int): Single<List<Ticker>> {
         return coinMarketService.getTickers(start, limit)

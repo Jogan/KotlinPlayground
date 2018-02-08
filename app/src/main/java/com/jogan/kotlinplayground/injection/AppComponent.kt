@@ -22,7 +22,7 @@ import com.jogan.kotlinplayground.injection.module.DataModule
 import com.jogan.kotlinplayground.injection.module.DatabaseModule
 import com.jogan.kotlinplayground.injection.module.NetworkModule
 import com.jogan.kotlinplayground.injection.module.SchedulerModule
-import com.jogan.kotlinplayground.ui.main.MainBuilder
+import com.jogan.kotlinplayground.ui.home.HomeBuilder
 import dagger.Component
 import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
@@ -36,7 +36,7 @@ import javax.inject.Singleton
             ViewModelBuilder::class,
             DataModule::class,
             DatabaseModule::class,
-            MainBuilder::class,
+            HomeBuilder::class,
             NetworkModule::class,
             SchedulerModule::class
         ])

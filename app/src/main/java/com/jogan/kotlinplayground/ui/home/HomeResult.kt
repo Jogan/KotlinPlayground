@@ -13,12 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.jogan.kotlinplayground.ui.main.browse
+package com.jogan.kotlinplayground.ui.home
 
-import com.jogan.kotlinplayground.ui.base.mvi.MviIntent
+import com.jogan.kotlinplayground.ui.base.mvi.MviResult
 
-sealed class BrowseIntent : MviIntent {
-    object InitialIntent : BrowseIntent()
-
-    data class RefreshIntent(val forceUpdate: Boolean, val offset: Int) : BrowseIntent()
+sealed class HomeResult : MviResult {
+    sealed class SyncTickerResult : HomeResult() {
+        data class Success(val success: Boolean) : SyncTickerResult()
+        data class Failure(val error: Throwable) : SyncTickerResult()
+        object InFlight : SyncTickerResult()
+    }
 }

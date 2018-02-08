@@ -21,4 +21,6 @@ interface ITickerRepository {
     fun getTickerForCurrency(id: String): Single<Ticker>
 
     fun getTickers(start: Int, limit: Int): Single<List<Ticker>>
+
+    fun getAndCacheTickers(): Single<Boolean>
 }

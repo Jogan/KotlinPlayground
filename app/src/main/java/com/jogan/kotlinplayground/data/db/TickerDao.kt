@@ -24,26 +24,37 @@ import android.arch.persistence.room.Insert
 import android.arch.persistence.room.OnConflictStrategy
 import android.arch.persistence.room.Query
 import android.arch.persistence.room.Update
+import io.reactivex.Single
+import timber.log.Timber
 
 @Dao
-interface TickerDao {
+abstract class TickerDao {
     @Query("SELECT * FROM tickers")
-    fun getAllTickers(): Flowable<List<Ticker>>
+    abstract fun getAllTickers(): Single<List<Ticker>>
 
     @Query("SELECT id, name, symbol FROM tickers")
-    fun getAllTickerTuples(): Flowable<List<TickerTuple>>
+    abstract fun getAllTickerTuples(): Flowable<List<TickerTuple>>
 
     @Query("SELECT * FROM tickers WHERE name LIKE :search OR symbol LIKE :search")
-    fun findAllTickersWithName(search: String): Flowable<List<TickerTuple>>
+    abstract fun findAllTickersWithName(search: String): Flowable<List<TickerTuple>>
+
+    @Query("SELECT COUNT(1) FROM tickers")
+    abstract fun tickerCount(): Single<List<Int>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertTickers(list: List<Ticker>)
+    abstract fun insertTicker(ticker: Ticker)
 
     @Update
-    fun updateTickers(list: List<Ticker>)
+    abstract fun updateTicker(ticker: Ticker)
 
     @Delete
-    fun deleteTickers(list: List<Ticker>)
+    abstract fun deleteTickers(list: List<Ticker>)
+
+    fun insertOrUpdateTicker(ticker: Ticker): Ticker {
+        Timber.d("Inserting ticker: %s", ticker)
+        insertTicker(ticker)
+        return ticker
+    }
 }
 
 class TickerTuple {

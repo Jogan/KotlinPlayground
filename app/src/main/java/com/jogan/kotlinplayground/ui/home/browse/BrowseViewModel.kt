@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.jogan.kotlinplayground.ui.main.browse
+package com.jogan.kotlinplayground.ui.home.browse
 
 import com.jogan.kotlinplayground.ui.base.mvi.MviIntent
 import com.jogan.kotlinplayground.ui.base.mvi.MviViewModel
-import com.jogan.kotlinplayground.ui.main.browse.BrowseResult.LoadTickerResult
+import com.jogan.kotlinplayground.ui.home.browse.BrowseResult.LoadTickerResult
 import com.jogan.kotlinplayground.util.RxAwareViewModel
 import io.reactivex.Observable
 import io.reactivex.ObservableTransformer

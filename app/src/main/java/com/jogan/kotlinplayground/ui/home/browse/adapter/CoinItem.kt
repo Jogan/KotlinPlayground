@@ -13,9 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.jogan.kotlinplayground.ui.main.browse.adapter
+package com.jogan.kotlinplayground.ui.home.browse.adapter
 
 import android.graphics.Color
+import android.view.View
 import com.jogan.kotlinplayground.R
 import com.jogan.kotlinplayground.data.ticker.Ticker
 import com.xwray.groupie.kotlinandroidextensions.Item
@@ -36,9 +37,14 @@ class CoinItem constructor(private val ticker: Ticker) : Item() {
         viewHolder.apply {
             coinTitleText.text = ticker.name
             coinPriceText.text = ticker.priceUsd
-            coinPercentChangeText.text = "${ticker.percentChange24h}%"
-            val color = if (ticker.percentChange24h.toBigDecimal() > BigDecimal.ZERO) Color.GREEN else Color.RED
-            coinPercentChangeText.setTextColor(color)
+            if(ticker.percentChange24h != null) {
+                coinPercentChangeText.visibility = View.VISIBLE
+                coinPercentChangeText.text = "${ticker.percentChange24h}%"
+                val color = if (ticker.percentChange24h.toBigDecimal() > BigDecimal.ZERO) Color.GREEN else Color.RED
+                coinPercentChangeText.setTextColor(color)
+            } else {
+                coinPercentChangeText.visibility = View.GONE
+            }
         }
     }
 }

@@ -13,17 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.jogan.kotlinplayground.data.ticker
+package com.jogan.kotlinplayground.ui.home
 
-import io.reactivex.Completable
-import io.reactivex.Single
+import com.jogan.kotlinplayground.data.ticker.Ticker
+import com.jogan.kotlinplayground.ui.base.mvi.MviViewState
 
-interface TickerDataSource {
-    fun getTickerForCurrency(id: String): Single<List<Ticker>>
+sealed class HomeViewState(
+        val isLoading: Boolean = false,
+        val success: Boolean = false,
+        val error: Throwable? = null
+) : MviViewState {
+    object InProgress : HomeViewState(true, false, null)
 
-    fun getTickers(start: Int, limit: Int): Single<List<Ticker>>
+    data class Failed(private val throwable: Throwable?) : HomeViewState(false, false, throwable)
 
-    fun hasTickers(): Single<Boolean>
+    class Success : HomeViewState(false, true)
 
-    fun saveTickers(tickers: List<Ticker>) : Completable
+    class Idle : HomeViewState(false, false, null)
 }

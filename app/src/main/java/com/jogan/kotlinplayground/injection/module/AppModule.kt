@@ -17,6 +17,7 @@ package com.jogan.kotlinplayground.injection.module
 
 import android.app.Application
 import android.content.Context
+import com.jogan.kotlinplayground.PlaygroundApplication
 import dagger.Module
 import dagger.Provides
 
@@ -25,7 +26,13 @@ object AppModule {
 
     @JvmStatic
     @Provides
-    fun provideContext(application: Application): Context {
+    fun provideApplication(application: PlaygroundApplication): Application {
+        return application
+    }
+
+    @JvmStatic
+    @Provides
+    fun provideContext(application: PlaygroundApplication): Context {
         return application.applicationContext
     }
 }
