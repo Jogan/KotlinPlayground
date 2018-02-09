@@ -15,8 +15,8 @@
  */
 package com.jogan.kotlinplayground.injection.module
 
-import com.jogan.kotlinplayground.data.ticker.ITickerRepository
-import com.jogan.kotlinplayground.data.ticker.TickerDataSource
+import com.jogan.kotlinplayground.data.ITickerRepository
+import com.jogan.kotlinplayground.data.source.TickerDataSource
 import com.nhaarman.mockito_kotlin.mock
 import dagger.Module
 import dagger.Provides

@@ -13,17 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.jogan.kotlinplayground.data.ticker
+package com.jogan.kotlinplayground.data
 
-import io.reactivex.Completable
+import com.jogan.kotlinplayground.data.model.Ticker
 import io.reactivex.Single
 
-interface TickerDataSource {
-    fun getTickerForCurrency(id: String): Single<List<Ticker>>
+interface ITickerRepository {
+    fun getTickerForCurrency(id: String): Single<Ticker>
 
     fun getTickers(start: Int, limit: Int): Single<List<Ticker>>
 
-    fun hasTickers(): Single<Boolean>
-
-    fun saveTickers(tickers: List<Ticker>) : Completable
+    fun getAndCacheTickers(): Single<Boolean>
 }

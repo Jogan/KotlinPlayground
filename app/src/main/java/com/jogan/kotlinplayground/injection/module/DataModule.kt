@@ -18,11 +18,11 @@ package com.jogan.kotlinplayground.injection.module
 import com.jogan.kotlinplayground.api.CoinMarketService
 import com.jogan.kotlinplayground.api.mapper.TickerMapper
 import com.jogan.kotlinplayground.data.db.TickerDao
-import com.jogan.kotlinplayground.data.ticker.ITickerRepository
-import com.jogan.kotlinplayground.data.ticker.TickerDataSource
-import com.jogan.kotlinplayground.data.ticker.TickerRepository
-import com.jogan.kotlinplayground.data.ticker.local.TickerLocalDataSource
-import com.jogan.kotlinplayground.data.ticker.remote.TickerRemoteDataSource
+import com.jogan.kotlinplayground.data.ITickerRepository
+import com.jogan.kotlinplayground.data.source.TickerDataSource
+import com.jogan.kotlinplayground.data.TickerRepository
+import com.jogan.kotlinplayground.data.source.TickerLocalDataSource
+import com.jogan.kotlinplayground.data.source.TickerRemoteDataSource
 import dagger.Module
 import dagger.Provides
 import javax.inject.Named

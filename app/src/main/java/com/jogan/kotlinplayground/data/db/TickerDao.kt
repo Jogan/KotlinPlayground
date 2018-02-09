@@ -15,7 +15,7 @@
  */
 package com.jogan.kotlinplayground.data.db
 
-import com.jogan.kotlinplayground.data.ticker.Ticker
+import com.jogan.kotlinplayground.data.model.Ticker
 import io.reactivex.Flowable
 import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Dao

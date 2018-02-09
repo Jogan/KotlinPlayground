@@ -19,7 +19,7 @@ import android.arch.persistence.room.Room
 import android.content.Context
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
-import com.jogan.kotlinplayground.data.ticker.Ticker
+import com.jogan.kotlinplayground.data.model.Ticker
 import com.jogan.kotlinplayground.test.util.TickerFactory
 import org.junit.After
 import org.junit.Before

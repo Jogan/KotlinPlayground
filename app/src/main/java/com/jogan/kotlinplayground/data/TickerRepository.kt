@@ -13,8 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.jogan.kotlinplayground.data.ticker
+package com.jogan.kotlinplayground.data
 
+import com.jogan.kotlinplayground.data.model.Ticker
+import com.jogan.kotlinplayground.data.source.TickerDataSource
 import io.reactivex.Single
 import timber.log.Timber
 import javax.inject.Inject

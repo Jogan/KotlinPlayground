@@ -24,7 +24,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.jakewharton.rxbinding2.support.v4.widget.RxSwipeRefreshLayout
 import com.jogan.kotlinplayground.R
-import com.jogan.kotlinplayground.data.ticker.Ticker
+import com.jogan.kotlinplayground.data.model.Ticker
 import com.jogan.kotlinplayground.ui.base.BaseFragment
 import com.jogan.kotlinplayground.ui.base.mvi.MviView
 import com.jogan.kotlinplayground.ui.home.browse.adapter.CoinItem

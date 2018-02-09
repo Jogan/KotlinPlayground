@@ -15,11 +15,8 @@
  */
 package com.jogan.kotlinplayground.ui.home
 
-import com.jogan.kotlinplayground.data.ticker.ITickerRepository
+import com.jogan.kotlinplayground.data.ITickerRepository
 import com.jogan.kotlinplayground.ui.home.HomeAction.SyncTickersAction
-import com.jogan.kotlinplayground.ui.home.browse.BrowseAction.LoadTickersAction
-import com.jogan.kotlinplayground.ui.home.browse.BrowseResult
-import com.jogan.kotlinplayground.ui.home.browse.BrowseResult.LoadTickerResult
 import com.jogan.kotlinplayground.util.schedulers.BaseSchedulerProvider
 import io.reactivex.Observable
 import io.reactivex.ObservableTransformer

@@ -16,7 +16,7 @@
 package com.jogan.kotlinplayground
 
 import com.jogan.kotlinplayground.DataFactory.Factory.randomUuid
-import com.jogan.kotlinplayground.data.ticker.Ticker
+import com.jogan.kotlinplayground.data.model.Ticker
 
 /**
  * Factory class for Bufferoo related instances

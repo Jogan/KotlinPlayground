@@ -15,7 +15,6 @@
  */
 package com.jogan.kotlinplayground.ui.home
 
-import com.jogan.kotlinplayground.data.ticker.Ticker
 import com.jogan.kotlinplayground.ui.base.mvi.MviViewState
 
 sealed class HomeViewState(

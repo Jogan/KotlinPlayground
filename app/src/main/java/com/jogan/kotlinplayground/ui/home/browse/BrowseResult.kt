@@ -15,7 +15,7 @@
  */
 package com.jogan.kotlinplayground.ui.home.browse
 
-import com.jogan.kotlinplayground.data.ticker.Ticker
+import com.jogan.kotlinplayground.data.model.Ticker
 import com.jogan.kotlinplayground.ui.base.mvi.MviResult
 
 sealed class BrowseResult : MviResult {

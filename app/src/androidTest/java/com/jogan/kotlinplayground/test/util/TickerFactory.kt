@@ -15,7 +15,7 @@
  */
 package com.jogan.kotlinplayground.test.util
 
-import com.jogan.kotlinplayground.data.ticker.Ticker
+import com.jogan.kotlinplayground.data.model.Ticker
 import com.jogan.kotlinplayground.test.util.DataFactory.randomLong
 import com.jogan.kotlinplayground.test.util.DataFactory.randomUuid
 

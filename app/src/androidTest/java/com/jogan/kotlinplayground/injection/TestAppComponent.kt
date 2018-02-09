@@ -16,7 +16,7 @@
 package com.jogan.kotlinplayground.injection
 
 import android.app.Application
-import com.jogan.kotlinplayground.data.ticker.ITickerRepository
+import com.jogan.kotlinplayground.data.ITickerRepository
 import com.jogan.kotlinplayground.injection.module.DatabaseModule
 import com.jogan.kotlinplayground.injection.module.TestAppModule
 import com.jogan.kotlinplayground.injection.module.TestDataModule

@@ -15,7 +15,7 @@
  */
 package com.jogan.kotlinplayground.ui.home.browse
 
-import com.jogan.kotlinplayground.data.ticker.ITickerRepository
+import com.jogan.kotlinplayground.data.ITickerRepository
 import com.jogan.kotlinplayground.ui.home.browse.BrowseAction.LoadTickersAction
 import com.jogan.kotlinplayground.ui.home.browse.BrowseResult.LoadTickerResult
 import com.jogan.kotlinplayground.util.schedulers.BaseSchedulerProvider

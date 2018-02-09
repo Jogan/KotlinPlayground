@@ -16,8 +16,8 @@
 package com.jogan.kotlinplayground.ui.home.browse
 
 import com.jogan.kotlinplayground.TickerFactory
-import com.jogan.kotlinplayground.data.ticker.Ticker
-import com.jogan.kotlinplayground.data.ticker.TickerRepository
+import com.jogan.kotlinplayground.data.model.Ticker
+import com.jogan.kotlinplayground.data.TickerRepository
 import com.jogan.kotlinplayground.util.schedulers.BaseSchedulerProvider
 import com.jogan.kotlinplayground.util.schedulers.ImmediateSchedulerProvider
 import com.nhaarman.mockito_kotlin.mock

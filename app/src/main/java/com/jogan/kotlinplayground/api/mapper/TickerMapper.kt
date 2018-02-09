@@ -16,7 +16,7 @@
 package com.jogan.kotlinplayground.api.mapper
 
 import com.jogan.kotlinplayground.api.models.TickerModel
-import com.jogan.kotlinplayground.data.ticker.Ticker
+import com.jogan.kotlinplayground.data.model.Ticker
 import com.jogan.kotlinplayground.remote.mapper.EntityMapper
 import javax.inject.Inject
 

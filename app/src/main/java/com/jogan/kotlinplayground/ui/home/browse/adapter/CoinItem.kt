@@ -18,7 +18,7 @@ package com.jogan.kotlinplayground.ui.home.browse.adapter
 import android.graphics.Color
 import android.view.View
 import com.jogan.kotlinplayground.R
-import com.jogan.kotlinplayground.data.ticker.Ticker
+import com.jogan.kotlinplayground.data.model.Ticker
 import com.xwray.groupie.kotlinandroidextensions.Item
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 
