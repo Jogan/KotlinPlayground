@@ -32,9 +32,14 @@ class TickerLocalDataSource @Inject constructor(
                 .map { it > 0 }
     }
 
-    override fun saveTickers(tickers: List<Ticker>) : Completable {
+    override fun saveTickers(tickers: List<Ticker>): Completable {
         return Completable.fromCallable {
-            tickers.forEach { it -> tickerDao.insertOrUpdateTicker(it) }
+            tickers.forEach { it ->
+                run {
+                    Timber.d("inserting Ticker -> %s", it.toString())
+                    tickerDao.insertTicker(it)
+                }
+            }
         }
     }
 

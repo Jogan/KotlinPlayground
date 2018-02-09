@@ -17,9 +17,13 @@ package com.jogan.kotlinplayground.data.db
 
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.RoomDatabase
+import android.arch.persistence.room.TypeConverters
+import com.jogan.kotlinplayground.data.model.Holding
 import com.jogan.kotlinplayground.data.model.Ticker
 
-@Database(entities = [Ticker::class], version = 1)
+@Database(entities = [Ticker::class, Holding::class], version = 1)
+@TypeConverters(Converters::class)
 abstract class PlaygroundDatabase : RoomDatabase() {
     abstract fun tickerDao(): TickerDao
+    abstract fun holdingDao(): HoldingDao
 }

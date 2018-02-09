@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "77190a55fddc4c2535634923fd4cb8d6",
+    "identityHash": "5f0614e05a77d79121cea57567c804e1",
     "entities": [
       {
         "tableName": "tickers",
@@ -71,11 +71,73 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "holdings",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `name` TEXT NOT NULL, `symbol` TEXT NOT NULL, `priceUsd` TEXT, `percentChange1h` TEXT, `percentChange24h` TEXT, `percentChange7d` TEXT, `totalAmountHeld` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "symbol",
+            "columnName": "symbol",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "priceUsd",
+            "columnName": "priceUsd",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "percentChange1h",
+            "columnName": "percentChange1h",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "percentChange24h",
+            "columnName": "percentChange24h",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "percentChange7d",
+            "columnName": "percentChange7d",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "totalAmountHeld",
+            "columnName": "totalAmountHeld",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"77190a55fddc4c2535634923fd4cb8d6\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"5f0614e05a77d79121cea57567c804e1\")"
     ]
   }
 }

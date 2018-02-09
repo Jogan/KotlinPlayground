@@ -15,38 +15,29 @@
  */
 package com.jogan.kotlinplayground.data.db
 
-import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Delete
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.OnConflictStrategy
 import android.arch.persistence.room.Query
 import android.arch.persistence.room.Update
-import com.jogan.kotlinplayground.data.model.Ticker
-import com.jogan.kotlinplayground.data.model.TickerTuple
-import io.reactivex.Flowable
+import com.jogan.kotlinplayground.data.model.Holding
 import io.reactivex.Single
 
 @Dao
-abstract class TickerDao {
-    @Query("SELECT * FROM tickers")
-    abstract fun getAllTickers(): Single<List<Ticker>>
+abstract class HoldingDao {
+    @Query("SELECT * FROM holdings")
+    abstract fun getAllHoldings(): Single<List<Holding>>
 
-    @Query("SELECT id, name, symbol FROM tickers")
-    abstract fun getAllTickerTuples(): Flowable<List<TickerTuple>>
-
-    @Query("SELECT * FROM tickers WHERE name LIKE :search OR symbol LIKE :search")
-    abstract fun findAllTickersWithName(search: String): Flowable<List<TickerTuple>>
-
-    @Query("SELECT COUNT(*) FROM tickers")
-    abstract fun tickerCount(): Single<Int>
+    @Query("SELECT COUNT(*) FROM holdings")
+    abstract fun holdingsCount(): Single<Int>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract fun insertTicker(ticker: Ticker)
+    abstract fun insertHolding(holding: Holding)
 
     @Update
-    abstract fun updateTicker(ticker: Ticker)
+    abstract fun updateHolding(holding: Holding)
 
     @Delete
-    abstract fun deleteTickers(list: List<Ticker>)
+    abstract fun deleteHolding(holding: Holding)
 }
