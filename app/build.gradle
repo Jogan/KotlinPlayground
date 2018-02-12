@@ -82,39 +82,39 @@ android {
 
 configurations.all {
     resolutionStrategy {
-        force "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+        force Plugins.kotlinStdLib
     }
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre8:${rootProject.kotlinVersion}"
+    implementation Plugins.kotlinStdLib
 
-    implementation "androidx.core:core-ktx:${rootProject.androidKtxVersion}"
+    implementation Deps.androidKtx
 
-    implementation "com.android.support:support-annotations:${rootProject.supportLibraryVersion}"
-    implementation "com.android.support:appcompat-v7:${rootProject.supportLibraryVersion}"
-    implementation "com.android.support:design:${rootProject.supportLibraryVersion}"
-    implementation "com.android.support:recyclerview-v7:${rootProject.supportLibraryVersion}"
-    implementation "com.android.support.constraint:constraint-layout:${rootProject.constraintLayoutVersion}"
+    implementation Deps.supportAnnotation
+    implementation Deps.supportAppCompat
+    implementation Deps.supportDesign
+    implementation Deps.supportRecyclerView
+    implementation Deps.supportConstraintLayout
 
-    implementation "android.arch.lifecycle:runtime:${rootProject.archComponentsVersion}"
-    implementation "android.arch.lifecycle:extensions:${rootProject.archComponentsVersion}"
-    implementation "android.arch.lifecycle:reactivestreams:${rootProject.archComponentsVersion}"
-    implementation "android.arch.paging:runtime:${rootProject.archComponentsPagingVersion}"
-    kapt "android.arch.lifecycle:compiler:${rootProject.archComponentsVersion}"
-    implementation "android.arch.persistence.room:runtime:${rootProject.roomVersion}"
-    implementation "android.arch.persistence.room:rxjava2:${rootProject.roomVersion}"
-    kapt "android.arch.persistence.room:compiler:${rootProject.roomVersion}"
+    implementation Deps.androidArchLifecycleRuntime
+    implementation Deps.androidArchLifecycleExtensions
+    implementation Deps.androidArchLifecycleRx
+    implementation Deps.androidArchPaging
+    kapt Deps.androidArchLifecycleCompiler
+    implementation Deps.androidArchRoom
+    implementation Deps.androidArchRoomRx
+    kapt Deps.androidArchRoomCompiler
 
-    implementation "com.google.dagger:dagger-android:${rootProject.daggerVersion}"
-    implementation "com.google.dagger:dagger-android-support:${rootProject.daggerVersion}"
-    kapt "com.google.dagger:dagger-compiler:${rootProject.daggerVersion}"
-    kapt "com.google.dagger:dagger-android-processor:${rootProject.daggerVersion}"
+    implementation Deps.daggerAndroid
+    implementation Deps.daggerAndroidSupport
+    kapt Deps.daggerCompiler
+    kapt Deps.daggerAndroidProcessor
 
-    implementation "io.reactivex.rxjava2:rxkotlin:${rootProject.rxKotlinVersion}"
-    implementation "io.reactivex.rxjava2:rxandroid:${rootProject.rxAndroidVersion}"
-    implementation "com.jakewharton.rxbinding2:rxbinding-kotlin:${rootProject.rxBindingVersion}"
-    implementation "com.jakewharton.rxbinding2:rxbinding-support-v4-kotlin:${rootProject.rxBindingVersion}"
+    implementation Deps.rxKotlin
+    implementation Deps.rxAndroid
+    implementation Deps.rxBindingKotlin
+    implementation Deps.rxBindingSupport
 
     implementation "javax.inject:javax.inject:${rootProject.javaxInjectVersion}"
 
