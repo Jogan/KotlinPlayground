@@ -1,5 +1,5 @@
 ext {
-    ci = System.getenv("CI") == "true"
+  ci = System.getenv("CI") == "true"
 }
 
 apply plugin: 'com.android.application'
@@ -7,179 +7,174 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 kapt {
-    correctErrorTypes = true
+  correctErrorTypes = true
 }
 apply plugin: 'kotlin-android-extensions'
 androidExtensions {
-    experimental = true
+  experimental = true
 }
 
 apply plugin: 'com.getkeepsafe.dexcount'
 dexcount {
-    // Only run the method counter on CI
-    runOnEachPackage = ci
+  // Only run the method counter on CI
+  runOnEachPackage = ci
 }
 
 android {
-    def globalConfiguration = rootProject.extensions.getByName("ext")
+  buildToolsVersion "27.0.3"
+  compileSdkVersion 27
 
-    compileSdkVersion globalConfiguration["androidCompileSdkVersion"]
-    buildToolsVersion globalConfiguration["androidBuildToolsVersion"]
+  defaultConfig {
+    applicationId "com.jogan.kotlinplayground"
+    minSdkVersion 21
+    targetSdkVersion 27
+    versionCode 1
+    versionName "1.0"
 
-    defaultConfig {
-        applicationId "com.jogan.kotlinplayground"
-        minSdkVersion globalConfiguration["androidMinSdkVersion"]
-        targetSdkVersion globalConfiguration["androidTargetSdkVersion"]
-        versionCode 1
-        versionName "1.0"
+    testInstrumentationRunner 'com.jogan.kotlinplayground.test.TestRunner'
 
-        testInstrumentationRunner 'com.jogan.kotlinplayground.test.TestRunner'
-
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
-            }
-        }
+    javaCompileOptions {
+      annotationProcessorOptions {
+        arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
+      }
     }
+  }
 
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
 
-    packagingOptions {
-        exclude 'LICENSE.txt'
-        exclude 'META-INF/DEPENDENCIES'
-        exclude 'META-INF/ASL2.0'
-        exclude 'META-INF/NOTICE'
-        exclude 'META-INF/LICENSE'
-    }
+  packagingOptions {
+    exclude 'LICENSE.txt'
+    exclude 'META-INF/DEPENDENCIES'
+    exclude 'META-INF/ASL2.0'
+    exclude 'META-INF/NOTICE'
+    exclude 'META-INF/LICENSE'
+  }
 
-    dexOptions {
-        // Don't pre-dex on CI
-        preDexLibraries !ci
-    }
+  dexOptions {
+    // Don't pre-dex on CI
+    preDexLibraries !ci
+  }
 
-    lintOptions {
-        // Disable lintVital. Not needed since lint is run on CI
-        checkReleaseBuilds false
-    }
+  lintOptions {
+    // Disable lintVital. Not needed since lint is run on CI
+    checkReleaseBuilds false
+  }
 
-    // Always show the result of every unit test, even if it passes.
-    testOptions.unitTests.all {
-        testLogging {
-            events 'passed', 'skipped', 'failed', 'standardOut', 'standardError'
-        }
+  // Always show the result of every unit test, even if it passes.
+  testOptions.unitTests.all {
+    testLogging {
+      events 'passed', 'skipped', 'failed', 'standardOut', 'standardError'
     }
+  }
 
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
-}
-
-configurations.all {
-    resolutionStrategy {
-        force Plugins.kotlinStdLib
-    }
+  }
 }
 
 dependencies {
-    implementation Plugins.kotlinStdLib
+  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.2.41"
 
-    implementation Deps.androidKtx
+  implementation "androidx.core:core-ktx:0.3"
 
-    implementation Deps.supportAnnotation
-    implementation Deps.supportAppCompat
-    implementation Deps.supportDesign
-    implementation Deps.supportRecyclerView
-    implementation Deps.supportConstraintLayout
+  implementation "com.android.support:support-annotations:27.1.1"
+  implementation "com.android.support:appcompat-v7:27.1.1"
+  implementation "com.android.support:design:27.1.1"
+  implementation "com.android.support:recyclerview-v7:27.1.1"
+  implementation "com.android.support.constraint:constraint-layout:1.1.0"
 
-    implementation Deps.androidArchLifecycleRuntime
-    implementation Deps.androidArchLifecycleExtensions
-    implementation Deps.androidArchLifecycleRx
-    implementation Deps.androidArchPaging
-    kapt Deps.androidArchLifecycleCompiler
-    implementation Deps.androidArchRoom
-    implementation Deps.androidArchRoomRx
-    kapt Deps.androidArchRoomCompiler
+  implementation "android.arch.lifecycle:runtime:1.1.0"
+  implementation "android.arch.lifecycle:extensions:1.1.0"
+  implementation "android.arch.lifecycle:reactivestreams:1.1.0"
+  implementation "android.arch.paging:runtime:1.0.0"
+  kapt "android.arch.lifecycle:compiler:1.1.0"
+  implementation "android.arch.persistence.room:runtime:1.1.0"
+  implementation "android.arch.persistence.room:rxjava2:1.1.0"
+  kapt "android.arch.persistence.room:compiler:1.1.0"
 
-    implementation Deps.daggerAndroid
-    implementation Deps.daggerAndroidSupport
-    kapt Deps.daggerCompiler
-    kapt Deps.daggerAndroidProcessor
+  implementation "com.google.dagger:dagger-android:2.14.1"
+  implementation "com.google.dagger:dagger-android-support:2.14.1"
+  kapt "com.google.dagger:dagger-compiler:2.14.1"
+  kapt "com.google.dagger:dagger-android-processor:2.14.1"
 
-    implementation Deps.rxKotlin
-    implementation Deps.rxAndroid
-    implementation Deps.rxBindingKotlin
-    implementation Deps.rxBindingSupport
+  implementation "io.reactivex.rxjava2:rxkotlin:2.2.0"
+  implementation "io.reactivex.rxjava2:rxandroid:2.0.2"
+  implementation "com.jakewharton.rxbinding2:rxbinding-kotlin:2.1.0"
+  implementation "com.jakewharton.rxbinding2:rxbinding-support-v4-kotlin:2.1.0"
 
-    implementation "javax.inject:javax.inject:${rootProject.javaxInjectVersion}"
+  implementation "javax.inject:javax.inject:1"
 
-    implementation "com.squareup.moshi:moshi:${rootProject.moshiVersion}"
-    implementation "com.squareup.okhttp3:okhttp:${rootProject.okHttpVersion}"
-    implementation "com.squareup.okhttp3:logging-interceptor:${rootProject.okHttpVersion}"
-    implementation "com.squareup.retrofit2:retrofit:${rootProject.retrofitVersion}"
-    implementation "com.squareup.retrofit2:converter-moshi:${rootProject.retrofitVersion}"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:${rootProject.retrofitVersion}"
+  implementation "com.squareup.moshi:moshi:1.5.0"
+  implementation "com.squareup.okhttp3:okhttp:3.10.0"
+  implementation "com.squareup.okhttp3:logging-interceptor:3.10.0"
+  implementation "com.squareup.retrofit2:retrofit:2.3.0"
+  implementation "com.squareup.retrofit2:converter-moshi:2.3.0"
+  implementation "com.squareup.retrofit2:adapter-rxjava2:2.3.0"
 
-    implementation "com.github.bumptech.glide:glide:${rootProject.glideVersion}"
+  implementation "com.github.bumptech.glide:glide:4.6.1"
 
-    implementation "com.xwray:groupie:${rootProject.groupieVersion}"
-    implementation "com.xwray:groupie-kotlin-android-extensions:${rootProject.groupieVersion}"
+  implementation "com.xwray:groupie:2.0.3"
+  implementation "com.xwray:groupie-kotlin-android-extensions:2.0.3"
 
-    implementation "com.jakewharton.timber:timber:${rootProject.timberVersion}"
+  implementation "com.jakewharton.timber:timber:4.6.1"
 
-    debugImplementation "nl.littlerobots.rxlint:rxlint:${rootProject.rxLintVersion}"
+  debugImplementation "nl.littlerobots.rxlint:rxlint:1.6"
 
-    debugImplementation "com.squareup.leakcanary:leakcanary-android:${rootProject.leakCanaryVersion}"
-    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:${rootProject.leakCanaryVersion}"
+  debugImplementation "com.squareup.leakcanary:leakcanary-android:1.5.4"
+  releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:1.5.4"
 
-    // Unit test dependencies
-    testImplementation "junit:junit:${rootProject.jUnitVersion}"
-    testImplementation "org.jetbrains.kotlin:kotlin-test-junit:${rootProject.kotlinVersion}"
-    testImplementation "com.nhaarman:mockito-kotlin:${rootProject.mockitoKotlinVersion}"
-    testImplementation "org.assertj:assertj-core:${rootProject.assertJVersion}"
-    testImplementation "org.robolectric:robolectric:${rootProject.robolectricVersion}"
-    testImplementation "android.arch.core:core-testing:${rootProject.archComponentsVersion}"
+  // Unit test dependencies
+  testImplementation "junit:junit:4.12"
+  testImplementation "org.jetbrains.kotlin:kotlin-test-junit:1.2.41"
+  testImplementation "com.nhaarman:mockito-kotlin:1.5.0"
+  testImplementation "org.assertj:assertj-core:3.8.0"
+  testImplementation "org.robolectric:robolectric:3.8"
+  testImplementation "android.arch.core:core-testing:1.1.1"
 
-    // Instrumentation test dependencies
-    androidTestImplementation "junit:junit:${rootProject.jUnitVersion}"
-    androidTestImplementation "com.nhaarman:mockito-kotlin:${rootProject.mockitoKotlinVersion}"
-    androidTestImplementation "org.mockito:mockito-android:${rootProject.mockitoAndroidVersion}"
-    androidTestImplementation("com.android.support.test.espresso:espresso-core:${rootProject.espressoVersion}") {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    }
-    androidTestImplementation("com.android.support.test:runner:${rootProject.runnerVersion}") {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    }
-    androidTestImplementation("com.android.support.test:rules:${rootProject.runnerVersion}") {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    }
-    androidTestImplementation("com.android.support.test.espresso:espresso-intents:${rootProject.espressoVersion}") {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    }
-    androidTestImplementation("com.android.support.test.espresso:espresso-contrib:${rootProject.espressoVersion}") {
-        exclude module: 'appcompat'
-        exclude module: 'appcompat-v7'
-        exclude module: 'support-v4'
-        exclude module: 'support-v13'
-        exclude module: 'support-annotations'
-        exclude module: 'recyclerview-v7'
-        exclude module: 'design'
-    }
+  // Instrumentation test dependencies
+  androidTestImplementation "junit:junit:4.12"
+  androidTestImplementation "com.nhaarman:mockito-kotlin:1.5.0"
+  androidTestImplementation "org.mockito:mockito-android:2.13.0"
+  androidTestImplementation(
+      "com.android.support.test.espresso:espresso-core:3.0.1") {
+    exclude group: 'com.android.support', module: 'support-annotations'
+  }
+  androidTestImplementation("com.android.support.test:runner:0.5") {
+    exclude group: 'com.android.support', module: 'support-annotations'
+  }
+  androidTestImplementation("com.android.support.test:rules:0.5") {
+    exclude group: 'com.android.support', module: 'support-annotations'
+  }
+  androidTestImplementation(
+      "com.android.support.test.espresso:espresso-intents:3.0.1") {
+    exclude group: 'com.android.support', module: 'support-annotations'
+  }
+  androidTestImplementation(
+      "com.android.support.test.espresso:espresso-contrib:3.0.1") {
+    exclude module: 'appcompat'
+    exclude module: 'appcompat-v7'
+    exclude module: 'support-v4'
+    exclude module: 'support-v13'
+    exclude module: 'support-annotations'
+    exclude module: 'recyclerview-v7'
+    exclude module: 'design'
+  }
 
-    kaptTest "com.google.dagger:dagger-compiler:${rootProject.daggerVersion}"
-    kaptAndroidTest "com.google.dagger:dagger-compiler:${rootProject.daggerVersion}"
+  kaptTest "com.google.dagger:dagger-compiler:2.14.1"
+  kaptAndroidTest "com.google.dagger:dagger-compiler:2.14.1"
 }
 
 def getGitHash() {
-    def stdout = new ByteArrayOutputStream()
-    exec {
-        commandLine 'git', 'rev-parse', '--short', 'HEAD'
-        standardOutput = stdout
-    }
-    return stdout.toString().trim()
+  def stdout = new ByteArrayOutputStream()
+  exec {
+    commandLine 'git', 'rev-parse', '--short', 'HEAD'
+    standardOutput = stdout
+  }
+  return stdout.toString().trim()
 }
