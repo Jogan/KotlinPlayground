@@ -16,7 +16,7 @@
 package com.jogan.kotlinplayground.injection.module
 
 import android.app.Application
-import android.arch.persistence.room.Room
+import androidx.room.Room
 import com.jogan.kotlinplayground.data.db.PlaygroundDatabase
 import com.jogan.kotlinplayground.data.db.TickerDao
 import dagger.Module

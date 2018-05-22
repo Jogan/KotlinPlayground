@@ -15,7 +15,7 @@
  */
 package com.jogan.kotlinplayground.test
 
-import android.support.test.InstrumentationRegistry
+import androidx.test.InstrumentationRegistry
 import com.jogan.kotlinplayground.injection.DaggerTestAppComponent
 import com.jogan.kotlinplayground.injection.TestAppComponent
 import dagger.android.AndroidInjector

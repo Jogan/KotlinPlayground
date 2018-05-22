@@ -15,10 +15,10 @@
  */
 package com.jogan.kotlinplayground.data.db
 
-import android.arch.persistence.room.Room
+import androidx.sqlite.room.Room
 import android.content.Context
-import android.support.test.InstrumentationRegistry
-import android.support.test.runner.AndroidJUnit4
+import androidx.test.InstrumentationRegistry
+import androidx.test.runner.AndroidJUnit4
 import com.jogan.kotlinplayground.data.model.Ticker
 import com.jogan.kotlinplayground.test.util.TickerFactory
 import org.junit.After

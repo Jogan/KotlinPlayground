@@ -15,7 +15,7 @@
  */
 package com.jogan.kotlinplayground.ui.home
 
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.ViewModel
 import com.jogan.kotlinplayground.injection.ViewModelKey
 import com.jogan.kotlinplayground.ui.home.browse.BrowseBuilder
 import dagger.Binds

@@ -15,7 +15,7 @@
  */
 package com.jogan.kotlinplayground.injection.module
 
-import android.arch.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProvider
 import com.jogan.kotlinplayground.injection.ViewModelFactory
 import dagger.Binds
 import dagger.Module

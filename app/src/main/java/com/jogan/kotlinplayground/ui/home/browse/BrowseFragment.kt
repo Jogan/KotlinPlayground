@@ -15,10 +15,10 @@
  */
 package com.jogan.kotlinplayground.ui.home.browse
 
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,7 +48,7 @@ class BrowseFragment : BaseFragment(), MviView<BrowseIntent, BrowseViewState> {
 
     // Views
     private val groupAdapter = GroupAdapter<ViewHolder>()
-    private lateinit var groupLayoutManager: LinearLayoutManager
+    private lateinit var groupLayoutManager: androidx.recyclerview.widget.LinearLayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,7 +79,8 @@ class BrowseFragment : BaseFragment(), MviView<BrowseIntent, BrowseViewState> {
     }
 
     private fun setupViews() {
-        groupLayoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+        groupLayoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity,
+            androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
         recyclerView.apply {
             layoutManager = groupLayoutManager
             adapter = groupAdapter

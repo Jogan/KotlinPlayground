@@ -16,12 +16,12 @@
 package com.jogan.kotlinplayground.ui.home
 
 import android.annotation.SuppressLint
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.annotation.IdRes
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
+import androidx.annotation.IdRes
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import android.view.View
 import com.jogan.kotlinplayground.R
 import com.jogan.kotlinplayground.ui.base.BaseActivity
@@ -118,8 +118,8 @@ class HomeActivity : BaseActivity(), MviView<HomeIntent, HomeViewState> {
 
     @SuppressLint("CommitTransaction")
     private fun addFragmentToActivity(
-            fragmentManager: FragmentManager,
-            fragment: Fragment,
+            fragmentManager: androidx.fragment.app.FragmentManager,
+            fragment: androidx.fragment.app.Fragment,
             @IdRes frameId: Int) {
         fragmentManager.beginTransaction().run {
             add(frameId, fragment)

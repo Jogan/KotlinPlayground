@@ -1,6 +1,6 @@
 package com.jogan.kotlinplayground.data.model
 
-import android.arch.persistence.room.ColumnInfo
+import androidx.room.ColumnInfo
 
 class TickerTuple {
     @ColumnInfo(name = "id")
