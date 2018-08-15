@@ -25,7 +25,7 @@ import io.reactivex.subjects.PublishSubject
 import javax.inject.Inject
 
 open class HomeViewModel @Inject internal constructor(
-        private val processor: HomeActionsProcessor
+    private val processor: HomeActionsProcessor
 ) : RxAwareViewModel(), MviViewModel<HomeIntent, HomeViewState> {
 
     private var intentsSubject: PublishSubject<HomeIntent> = PublishSubject.create()

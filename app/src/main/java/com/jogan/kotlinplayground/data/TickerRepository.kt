@@ -23,8 +23,8 @@ import javax.inject.Inject
 import javax.inject.Named
 
 open class TickerRepository @Inject constructor(
-        @Named("remote") private val tickerRemoteDataSource: TickerDataSource,
-        @Named("local") private val tickerLocalDataSource: TickerDataSource
+    @Named("remote") private val tickerRemoteDataSource: TickerDataSource,
+    @Named("local") private val tickerLocalDataSource: TickerDataSource
 ) : ITickerRepository {
 
     override fun getTickerForCurrency(id: String): Single<Ticker> {

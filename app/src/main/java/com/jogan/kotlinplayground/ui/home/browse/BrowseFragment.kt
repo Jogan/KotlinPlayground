@@ -18,10 +18,10 @@ package com.jogan.kotlinplayground.ui.home.browse
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.jakewharton.rxbinding2.support.v4.widget.RxSwipeRefreshLayout
 import com.jogan.kotlinplayground.R
 import com.jogan.kotlinplayground.data.model.Ticker
@@ -39,8 +39,8 @@ import javax.inject.Inject
 
 class BrowseFragment : BaseFragment(), MviView<BrowseIntent, BrowseViewState> {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+    @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
+
     private lateinit var viewModel: BrowseViewModel
 
     private val disposables = CompositeDisposable()
@@ -48,7 +48,7 @@ class BrowseFragment : BaseFragment(), MviView<BrowseIntent, BrowseViewState> {
 
     // Views
     private val groupAdapter = GroupAdapter<ViewHolder>()
-    private lateinit var groupLayoutManager: androidx.recyclerview.widget.LinearLayoutManager
+    private lateinit var groupLayoutManager: LinearLayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,7 +56,11 @@ class BrowseFragment : BaseFragment(), MviView<BrowseIntent, BrowseViewState> {
                 .get(BrowseViewModel::class.java)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_browse, container, false)
     }
 
@@ -70,7 +74,7 @@ class BrowseFragment : BaseFragment(), MviView<BrowseIntent, BrowseViewState> {
         super.onResume()
         // conflicting with the initial intent but needed when coming back from the
         // an "update" activity to refresh the list.
-        //refreshIntentPublisher.onNext(BrowseIntent.RefreshIntent(false))
+        // refreshIntentPublisher.onNext(BrowseIntent.RefreshIntent(false))
     }
 
     override fun onDestroy() {
@@ -79,8 +83,7 @@ class BrowseFragment : BaseFragment(), MviView<BrowseIntent, BrowseViewState> {
     }
 
     private fun setupViews() {
-        groupLayoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity,
-            androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
+        groupLayoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         recyclerView.apply {
             layoutManager = groupLayoutManager
             adapter = groupAdapter

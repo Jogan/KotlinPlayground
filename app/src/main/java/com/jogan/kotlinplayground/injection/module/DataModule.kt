@@ -58,9 +58,9 @@ object DataModule {
     @Provides
     @Singleton
     fun provideTickerRepository(
-            tickerRemoteDataSource: TickerRemoteDataSource,
-            tickerLocalDataSource: TickerLocalDataSource)
-            : ITickerRepository {
+        tickerRemoteDataSource: TickerRemoteDataSource,
+        tickerLocalDataSource: TickerLocalDataSource
+    ): ITickerRepository {
         return TickerRepository(tickerRemoteDataSource, tickerLocalDataSource)
     }
 }

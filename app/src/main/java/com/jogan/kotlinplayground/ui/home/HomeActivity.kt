@@ -118,9 +118,10 @@ class HomeActivity : BaseActivity(), MviView<HomeIntent, HomeViewState> {
 
     @SuppressLint("CommitTransaction")
     private fun addFragmentToActivity(
-            fragmentManager: androidx.fragment.app.FragmentManager,
-            fragment: androidx.fragment.app.Fragment,
-            @IdRes frameId: Int) {
+        fragmentManager: androidx.fragment.app.FragmentManager,
+        fragment: androidx.fragment.app.Fragment,
+        @IdRes frameId: Int
+    ) {
         fragmentManager.beginTransaction().run {
             add(frameId, fragment)
             commit()

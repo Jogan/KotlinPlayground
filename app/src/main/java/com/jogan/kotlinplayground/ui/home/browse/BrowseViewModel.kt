@@ -33,7 +33,7 @@ import javax.inject.Inject
  * actions.
  */
 open class BrowseViewModel @Inject internal constructor(
-        private val processor: BrowseActionsProcessor
+    private val processor: BrowseActionsProcessor
 ) : RxAwareViewModel(), MviViewModel<BrowseIntent, BrowseViewState> {
 
     /**

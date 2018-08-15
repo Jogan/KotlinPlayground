@@ -23,8 +23,9 @@ import io.reactivex.Single
 import javax.inject.Inject
 
 class TickerRemoteDataSource @Inject constructor(
-        private val coinMarketService: CoinMarketService,
-        private val tickerMapper: TickerMapper) : TickerDataSource {
+    private val coinMarketService: CoinMarketService,
+    private val tickerMapper: TickerMapper
+) : TickerDataSource {
 
     override fun hasTickers(): Single<Boolean> {
         return Single.just(false)

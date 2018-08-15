@@ -37,7 +37,7 @@ class CoinItem constructor(private val ticker: Ticker) : Item() {
         viewHolder.apply {
             coinTitleText.text = ticker.name
             coinPriceText.text = ticker.priceUsd
-            if(ticker.percentChange24h != null) {
+            if (ticker.percentChange24h != null) {
                 coinPercentChangeText.visibility = View.VISIBLE
                 coinPercentChangeText.text = "${ticker.percentChange24h}%"
                 val color = if (ticker.percentChange24h.toBigDecimal() > BigDecimal.ZERO) Color.GREEN else Color.RED

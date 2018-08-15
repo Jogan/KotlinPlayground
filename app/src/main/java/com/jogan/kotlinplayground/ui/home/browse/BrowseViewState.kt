@@ -19,9 +19,9 @@ import com.jogan.kotlinplayground.data.model.Ticker
 import com.jogan.kotlinplayground.ui.base.mvi.MviViewState
 
 sealed class BrowseViewState(
-        val isLoading: Boolean = false,
-        val tickers: List<Ticker>? = null,
-        val error: Throwable? = null
+    val isLoading: Boolean = false,
+    val tickers: List<Ticker>? = null,
+    val error: Throwable? = null
 ) : MviViewState {
     object InProgress : BrowseViewState(true, null, null)
 

@@ -25,12 +25,14 @@ import androidx.room.PrimaryKey
  * from the properties (equals/hashCode, toString, copy)
  */
 @Entity(tableName = "tickers")
-data class Ticker(@PrimaryKey val id: String,
-                  val name: String,
-                  val symbol: String,
-                  val rank: String,
-                  val priceUsd: String?,
-                  val priceBtc: String?,
-                  val percentChange1h: String?,
-                  val percentChange24h: String?,
-                  val percentChange7d: String?)
+data class Ticker(
+    @PrimaryKey val id: String,
+    val name: String,
+    val symbol: String,
+    val rank: String,
+    val priceUsd: String?,
+    val priceBtc: String?,
+    val percentChange1h: String?,
+    val percentChange24h: String?,
+    val percentChange7d: String?
+)

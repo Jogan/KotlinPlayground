@@ -18,9 +18,9 @@ package com.jogan.kotlinplayground.ui.home
 import com.jogan.kotlinplayground.ui.base.mvi.MviViewState
 
 sealed class HomeViewState(
-        val isLoading: Boolean = false,
-        val success: Boolean = false,
-        val error: Throwable? = null
+    val isLoading: Boolean = false,
+    val success: Boolean = false,
+    val error: Throwable? = null
 ) : MviViewState {
     object InProgress : HomeViewState(true, false, null)
 

@@ -30,8 +30,9 @@ import javax.inject.Inject
  * but was separated to ease maintenance, as the [MviViewModel] was getting too big.
  */
 class HomeActionsProcessor @Inject constructor(
-        private val tickerRepository: ITickerRepository,
-        private val schedulerProvider: BaseSchedulerProvider) {
+    private val tickerRepository: ITickerRepository,
+    private val schedulerProvider: BaseSchedulerProvider
+) {
 
     private val syncTickersProcessor =
             ObservableTransformer<SyncTickersAction, HomeResult> { actions ->

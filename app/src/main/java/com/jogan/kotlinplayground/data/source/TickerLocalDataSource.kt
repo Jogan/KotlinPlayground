@@ -23,7 +23,8 @@ import timber.log.Timber
 import javax.inject.Inject
 
 class TickerLocalDataSource @Inject constructor(
-        private val tickerDao: TickerDao)
+    private val tickerDao: TickerDao
+)
     : TickerDataSource {
 
     override fun hasTickers(): Single<Boolean> {
@@ -44,10 +45,10 @@ class TickerLocalDataSource @Inject constructor(
     }
 
     override fun getTickers(start: Int, limit: Int): Single<List<Ticker>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 
     override fun getTickerForCurrency(id: String): Single<List<Ticker>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 }

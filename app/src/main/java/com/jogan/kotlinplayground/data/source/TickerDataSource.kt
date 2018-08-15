@@ -26,5 +26,5 @@ interface TickerDataSource {
 
     fun hasTickers(): Single<Boolean>
 
-    fun saveTickers(tickers: List<Ticker>) : Completable
+    fun saveTickers(tickers: List<Ticker>): Completable
 }

@@ -31,8 +31,9 @@ import javax.inject.Inject
  * but was separated to ease maintenance, as the [MviViewModel] was getting too big.
  */
 class BrowseActionsProcessor @Inject constructor(
-        private val tickerRepository: ITickerRepository,
-        private val schedulerProvider: BaseSchedulerProvider) {
+    private val tickerRepository: ITickerRepository,
+    private val schedulerProvider: BaseSchedulerProvider
+) {
 
     /**
      * Number of elements to load per request

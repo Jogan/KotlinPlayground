@@ -15,7 +15,6 @@
  */
 package com.jogan.kotlinplayground.data.db
 
-import androidx.room.ColumnInfo
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
