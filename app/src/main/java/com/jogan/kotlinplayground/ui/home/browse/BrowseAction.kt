@@ -18,5 +18,7 @@ package com.jogan.kotlinplayground.ui.home.browse
 import com.jogan.kotlinplayground.ui.base.mvi.MviAction
 
 sealed class BrowseAction : MviAction {
-    data class LoadTickersAction(val start: Int, val forceUpdate: Boolean) : BrowseAction()
+    data class LoadTickersAction(val start: Int, val forceUpdate: Boolean) : BrowseAction() {
+        override fun toString(): String = LoadTickersAction::class.java.simpleName
+    }
 }

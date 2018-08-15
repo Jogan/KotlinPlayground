@@ -22,10 +22,11 @@ import io.reactivex.Observable
 import io.reactivex.ObservableTransformer
 import io.reactivex.functions.BiFunction
 import io.reactivex.subjects.PublishSubject
+import timber.log.Timber
 import javax.inject.Inject
 
 open class HomeViewModel @Inject internal constructor(
-    private val processor: HomeActionsProcessor
+        private val processor: HomeActionsProcessor
 ) : RxAwareViewModel(), MviViewModel<HomeIntent, HomeViewState> {
 
     private var intentsSubject: PublishSubject<HomeIntent> = PublishSubject.create()
@@ -35,15 +36,15 @@ open class HomeViewModel @Inject internal constructor(
      * to avoid reloading data on config changes
      */
     private val intentFilter: ObservableTransformer<HomeIntent, HomeIntent> =
-            ObservableTransformer<HomeIntent, HomeIntent> {
+            ObservableTransformer {
                 it.publish {
                     Observable.merge(it.ofType(HomeIntent.InitialIntent::class.java).take(1),
-                            it.filter({ intent -> intent !is HomeIntent.InitialIntent }))
+                            it.filter { intent -> intent !== HomeIntent.InitialIntent })
                 }
             }
 
     private val reducer: BiFunction<HomeViewState, HomeResult, HomeViewState> =
-            BiFunction<HomeViewState, HomeResult, HomeViewState> { previousState, result ->
+            BiFunction { previousState, result ->
                 when (result) {
                     is HomeResult.SyncTickerResult -> when (result) {
                         is HomeResult.SyncTickerResult.Success -> HomeViewState.Success()
@@ -69,12 +70,16 @@ open class HomeViewModel @Inject internal constructor(
     private fun compose(): Observable<HomeViewState> {
         return intentsSubject
                 .compose(intentFilter)
+                .doOnNext { Timber.d("Got intent: $it") }
                 .map(this::actionFromIntent)
+                .doOnNext { Timber.d("Got action from intent: $it") }
                 .compose(processor.actionProcessor)
+                .doOnNext { Timber.d("Got result from action: $it") }
                 // Cache each state and pass it to the reducer to create a new state from
                 // the previous cached one and the latest Result emitted from the action processor.
                 // The Scan operator is used here for the caching.
                 .scan<HomeViewState>(HomeViewState.Idle(), reducer)
+                .doOnNext { Timber.d("Got new view state: $it") }
                 // Emit the last one event of the stream on subscription
                 // Useful when a View rebinds to the ViewModel after rotation.
                 .replay(1)
@@ -87,7 +92,7 @@ open class HomeViewModel @Inject internal constructor(
     private fun actionFromIntent(intent: MviIntent): HomeAction {
         return when (intent) {
             is HomeIntent.InitialIntent -> HomeAction.SyncTickersAction
-            else -> throw UnsupportedOperationException("Oops, that looks like an unknown intent: " + intent)
+            else -> throw UnsupportedOperationException("Oops, that looks like an unknown intent: $intent")
         }
     }
 }

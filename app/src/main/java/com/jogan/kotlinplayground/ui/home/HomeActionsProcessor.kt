@@ -65,7 +65,7 @@ class HomeActionsProcessor @Inject constructor(
                             .compose(syncTickersProcessor)
                             .mergeWith(
                                     // Error for not implemented actions
-                                    it.filter { v -> v !is SyncTickersAction }
+                                    it.filter { v -> v !== SyncTickersAction }
                                             .flatMap { w ->
                                                 Observable.error<HomeResult>(
                                                         IllegalArgumentException("Unknown Action type: $w"))

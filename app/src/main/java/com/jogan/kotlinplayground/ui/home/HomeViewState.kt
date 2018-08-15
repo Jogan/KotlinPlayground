@@ -17,16 +17,24 @@ package com.jogan.kotlinplayground.ui.home
 
 import com.jogan.kotlinplayground.ui.base.mvi.MviViewState
 
-sealed class HomeViewState(
-    val isLoading: Boolean = false,
-    val success: Boolean = false,
-    val error: Throwable? = null
-) : MviViewState {
-    object InProgress : HomeViewState(true, false, null)
+sealed class HomeViewState(val isLoading: Boolean = false,
+                           val success: Boolean = false,
+                           val error: Throwable? = null)
+    : MviViewState {
 
-    data class Failed(private val throwable: Throwable?) : HomeViewState(false, false, throwable)
+    object InProgress : HomeViewState(true, false, null) {
+        override fun toString(): String = InProgress::class.java.simpleName
+    }
 
-    class Success : HomeViewState(false, true)
+    data class Failed(private val throwable: Throwable?) : HomeViewState(false, false, throwable) {
+        override fun toString(): String = Failed::class.java.simpleName
+    }
 
-    class Idle : HomeViewState(false, false, null)
+    class Success : HomeViewState(false, true) {
+        override fun toString(): String = Success::class.java.simpleName
+    }
+
+    class Idle : HomeViewState(false, false, null) {
+        override fun toString(): String = Idle::class.java.simpleName
+    }
 }

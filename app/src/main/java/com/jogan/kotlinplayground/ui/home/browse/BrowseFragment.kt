@@ -39,7 +39,8 @@ import javax.inject.Inject
 
 class BrowseFragment : BaseFragment(), MviView<BrowseIntent, BrowseViewState> {
 
-    @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private lateinit var viewModel: BrowseViewModel
 
@@ -52,15 +53,10 @@ class BrowseFragment : BaseFragment(), MviView<BrowseIntent, BrowseViewState> {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(BrowseViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(BrowseViewModel::class.java)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_browse, container, false)
     }
 

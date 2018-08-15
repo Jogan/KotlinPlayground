@@ -18,16 +18,24 @@ package com.jogan.kotlinplayground.ui.home.browse
 import com.jogan.kotlinplayground.data.model.Ticker
 import com.jogan.kotlinplayground.ui.base.mvi.MviViewState
 
-sealed class BrowseViewState(
-    val isLoading: Boolean = false,
-    val tickers: List<Ticker>? = null,
-    val error: Throwable? = null
-) : MviViewState {
-    object InProgress : BrowseViewState(true, null, null)
+sealed class BrowseViewState(val isLoading: Boolean = false,
+                             val tickers: List<Ticker>? = null,
+                             val error: Throwable? = null)
+    : MviViewState {
 
-    data class Failed(private val throwable: Throwable?) : BrowseViewState(false, null, throwable)
+    object InProgress : BrowseViewState(true, null, null) {
+        override fun toString(): String = InProgress::class.java.simpleName
+    }
 
-    data class Success(private val result: List<Ticker>?) : BrowseViewState(false, result)
+    data class Failed(private val throwable: Throwable?) : BrowseViewState(false, null, throwable) {
+        override fun toString(): String = Failed::class.java.simpleName
+    }
 
-    class Idle : BrowseViewState(false, null, null)
+    data class Success(private val result: List<Ticker>?) : BrowseViewState(false, result) {
+        override fun toString(): String = Success::class.java.simpleName
+    }
+
+    class Idle : BrowseViewState(false, null, null) {
+        override fun toString(): String = Idle::class.java.simpleName
+    }
 }

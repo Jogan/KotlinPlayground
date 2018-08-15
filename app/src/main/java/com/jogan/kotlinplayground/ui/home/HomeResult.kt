@@ -19,8 +19,14 @@ import com.jogan.kotlinplayground.ui.base.mvi.MviResult
 
 sealed class HomeResult : MviResult {
     sealed class SyncTickerResult : HomeResult() {
-        data class Success(val success: Boolean) : SyncTickerResult()
-        data class Failure(val error: Throwable) : SyncTickerResult()
-        object InFlight : SyncTickerResult()
+        data class Success(val success: Boolean) : SyncTickerResult() {
+            override fun toString(): String = Success::class.java.simpleName
+        }
+        data class Failure(val error: Throwable) : SyncTickerResult() {
+            override fun toString(): String = Failure::class.java.simpleName
+        }
+        object InFlight : SyncTickerResult() {
+            override fun toString(): String = InFlight::class.java.simpleName
+        }
     }
 }

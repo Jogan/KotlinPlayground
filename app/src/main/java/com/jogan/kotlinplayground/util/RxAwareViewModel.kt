@@ -24,7 +24,7 @@ import io.reactivex.disposables.CompositeDisposable
  */
 open class RxAwareViewModel : ViewModel() {
 
-    val disposables = CompositeDisposable()
+    private val disposables = CompositeDisposable()
 
     override fun onCleared() {
         super.onCleared()

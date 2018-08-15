@@ -18,5 +18,7 @@ package com.jogan.kotlinplayground.ui.home
 import com.jogan.kotlinplayground.ui.base.mvi.MviAction
 
 sealed class HomeAction : MviAction {
-    object SyncTickersAction : HomeAction()
+    object SyncTickersAction : HomeAction() {
+        override fun toString(): String = SyncTickersAction::class.java.simpleName
+    }
 }

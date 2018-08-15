@@ -18,5 +18,7 @@ package com.jogan.kotlinplayground.ui.home
 import com.jogan.kotlinplayground.ui.base.mvi.MviIntent
 
 sealed class HomeIntent : MviIntent {
-    object InitialIntent : HomeIntent()
+    object InitialIntent : HomeIntent() {
+        override fun toString(): String = InitialIntent::class.java.simpleName
+    }
 }

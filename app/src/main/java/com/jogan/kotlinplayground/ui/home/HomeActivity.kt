@@ -37,14 +37,14 @@ class HomeActivity : BaseActivity(), MviView<HomeIntent, HomeViewState> {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
+
     private lateinit var viewModel: HomeViewModel
 
     private val disposables = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(HomeViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(HomeViewModel::class.java)
 
         setContentView(R.layout.activity_home)
         setSupportActionBar(toolbar)
@@ -59,7 +59,7 @@ class HomeActivity : BaseActivity(), MviView<HomeIntent, HomeViewState> {
 
     private fun bind() {
         // Subscribe to the ViewModel and call render for every emitted state
-        disposables.add(viewModel.states().subscribe({ render(it) }))
+        disposables.add(viewModel.states().subscribe { render(it) })
         // Pass the UI's intents to the ViewModel
         viewModel.processIntents(intents())
     }

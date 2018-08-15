@@ -20,8 +20,14 @@ import com.jogan.kotlinplayground.ui.base.mvi.MviResult
 
 sealed class BrowseResult : MviResult {
     sealed class LoadTickerResult : BrowseResult() {
-        data class Success(val tickers: List<Ticker>) : LoadTickerResult()
-        data class Failure(val error: Throwable) : LoadTickerResult()
-        object InFlight : LoadTickerResult()
+        data class Success(val tickers: List<Ticker>) : LoadTickerResult() {
+            override fun toString(): String = Success::class.java.simpleName
+        }
+        data class Failure(val error: Throwable) : LoadTickerResult() {
+            override fun toString(): String = Failure::class.java.simpleName
+        }
+        object InFlight : LoadTickerResult() {
+            override fun toString(): String = InFlight::class.java.simpleName
+        }
     }
 }

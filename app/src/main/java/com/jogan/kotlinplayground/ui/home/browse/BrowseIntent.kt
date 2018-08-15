@@ -18,7 +18,11 @@ package com.jogan.kotlinplayground.ui.home.browse
 import com.jogan.kotlinplayground.ui.base.mvi.MviIntent
 
 sealed class BrowseIntent : MviIntent {
-    object InitialIntent : BrowseIntent()
+    object InitialIntent : BrowseIntent() {
+        override fun toString(): String = InitialIntent::class.java.simpleName
+    }
 
-    data class RefreshIntent(val forceUpdate: Boolean, val offset: Int) : BrowseIntent()
+    data class RefreshIntent(val forceUpdate: Boolean, val offset: Int) : BrowseIntent() {
+        override fun toString(): String = RefreshIntent::class.java.simpleName
+    }
 }
